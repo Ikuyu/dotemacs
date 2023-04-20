@@ -108,4 +108,3 @@
 ;; -----------
 (when (and (my/macos-p) (not my/modus-tollens))
   (load (concat user-emacs-directory "init-file-add-ons/user-keymap.el")))
-(put 'dired-find-alternate-file 'disabled nil)
