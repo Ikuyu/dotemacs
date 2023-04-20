@@ -108,11 +108,11 @@
         mm-default-directory "~/Downloads/"  ; default directory for saving attachments
         gnus-summary-line-format (concat
                                   "%0{%U%R%z%}"                 ;; Status
-                                  "%3{‚îÇ%}" "%1{%d%}" "%3{‚îÇ%}"   ;; date
+                                  "%3{│%}" "%1{%d%}" "%3{│%}"   ;; date
                                   "  "
                                   "%4{%-20,20f%}"               ;; name
                                   "  "
-                                  "%3{‚îÇ%}"
+                                  "%3{│%}"
                                   " "
                                   "%B"
                                   "%s\n")
@@ -123,27 +123,27 @@
       (setq
        ;; Summary Threading Marks
        gnus-sum-thread-tree-indent          " "
-       gnus-sum-thread-tree-false-root      "‚òÜ "
-       gnus-sum-thread-tree-single-indent   "‚óé "
-       gnus-sum-thread-tree-root            "‚óè "
-       gnus-sum-thread-tree-vertical        "‚îÉ"
-       gnus-sum-thread-tree-leaf-with-other "‚î£‚îÅ‚ùØ "
-       gnus-sum-thread-tree-single-leaf     "‚îó‚îÅ‚ùØ "
+       gnus-sum-thread-tree-false-root      "☆ "
+       gnus-sum-thread-tree-single-indent   "◎ "
+       gnus-sum-thread-tree-root            "● "
+       gnus-sum-thread-tree-vertical        "┃"
+       gnus-sum-thread-tree-leaf-with-other "┣━❯ "
+       gnus-sum-thread-tree-single-leaf     "┗━❯ "
        ;; Summary Mode Marks
-       gnus-score-over-mark  ?‚Üë
-       gnus-score-below-mark ?‚Üì
-       gnus-ticked-mark      ?‚öë
-       gnus-dormant-mark     ?‚öê
-       gnus-expirable-mark   ?‚ôª
-       gnus-read-mark        ?‚úì
-       gnus-del-mark         ?‚úó
-       gnus-killed-mark      ?‚ò†
-       gnus-replied-mark     ?‚ü≤
-       gnus-forwarded-mark   ?‚§≥
-       gnus-cached-mark      ?‚òç
-       gnus-recent-mark      ?‚òÖ
-       gnus-unseen-mark      ?‚ú©
-       gnus-unread-mark      ?‚úâ))
+       gnus-score-over-mark  ?↑
+       gnus-score-below-mark ?↓
+       gnus-ticked-mark      ?⚑
+       gnus-dormant-mark     ?⚐
+       gnus-expirable-mark   ?♻
+       gnus-read-mark        ?✓
+       gnus-del-mark         ?✗
+       gnus-killed-mark      ?☠
+       gnus-replied-mark     ?⟲
+       gnus-forwarded-mark   ?⤳
+       gnus-cached-mark      ?☍
+       gnus-recent-mark      ?★
+       gnus-unseen-mark      ?✩
+       gnus-unread-mark      ?✉))
   :hook
   (gnus-save-quick-newsrc-hook . (lambda () (set (make-local-variable 'backup-inhibited) t)))
   (gnus-save-standard-newsrc-hook . (lambda () (set (make-local-variable 'backup-inhibited) t)))
