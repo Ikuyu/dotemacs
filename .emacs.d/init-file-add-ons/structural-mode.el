@@ -71,8 +71,8 @@
   (defun my/structural-slurp-sexp (&optional n)
     "Move closing delimiter N expressions forward.
 
-In:  (foo ‚ñàbar) baz
-Out: (foo ‚ñàbar baz)"
+In:  (foo █bar) baz
+Out: (foo █bar baz)"
     (interactive "p")
     (condition-case e
         (save-excursion
@@ -90,8 +90,8 @@ Out: (foo ‚ñàbar baz)"
   (defun my/structural-barf-sexp (&optional n)
     "Move closing delimiter N expressions forward.
 
-In:  (foo ‚ñàbar baz)
-Out: (foo ‚ñàbar) baz"
+In:  (foo █bar baz)
+Out: (foo █bar) baz"
     (interactive "p")
     (condition-case e
         (save-excursion
@@ -113,7 +113,7 @@ Out: (foo ‚ñàbar) baz"
     "Simple structural editing mode.
 
 \\<structural-mode-map>"
-    :lighter " (Œª)"
+    :lighter " (λ)"
     :group 'editing
     :keymap (make-sparse-keymap))
   (provide 'my/structural-mode))
