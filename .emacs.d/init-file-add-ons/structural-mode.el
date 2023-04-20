@@ -41,7 +41,7 @@
 	  emacs-lisp-mode
 	  scheme-mode
 	  lisp-interaction-mode) . my/structural-mode)
-  :bind (:map structural-mode-map
+  :bind (:map my/structural-mode-map
               ("C-M-[" . my/structural-slurp-sexp)
               ("C-M-]" . my/structural-barf-sexp))
   :preface
