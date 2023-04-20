@@ -67,7 +67,7 @@
 ;; Adjust global settings (variables).
 (setq electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
       fast-but-imprecise-scrolling t             ; accelerate scrolling operations
-      inhibit-compacting-font-caches t           ; don‚Äôt compact font caches during garbage collection
+      inhibit-compacting-font-caches t           ; don’t compact font caches during garbage collection
       save-interprogram-paste-before-kill t      ; ensure that Emacs kill operations do not irrevocably overwrite existing clipboard text
       apropos-do-all t                           ; apropos commands will search more extensively
       mouse-yank-at-point t                      ; middle-clicking pastes at the current location instead of moving it
@@ -76,7 +76,7 @@
       mouse-wheel-follow-mouse t                 ; if the frame contains multiple windows, scroll the one under the pointer instead of the one that has keyboard focus
       mouse-wheel-progressive-speed nil          ; if moving the wheel faster don't make the scrolling progressively faster
       mouse-wheel-scroll-amount '(2 ((shift) . 4) ((control) . 6)) ; scroll two lines at once - not 5
-      mac-redisplay-dont-reset-vscroll t         ; update doesn‚Äôt reset vscroll
+      mac-redisplay-dont-reset-vscroll t         ; update doesn’t reset vscroll
       ;; mac-mouse-wheel-smooth-scroll nil       ; enable character scrolling (2 lines at once)
       blink-cursor-blinks -1                     ; by default the cusor stops blinking after 10 blinks. 0 or a negative value means blink forever
       package-native-compile t                   ; natively compile packages for more speed (might give some warnings but can be ignored)
@@ -103,7 +103,7 @@
       compilation-scroll-output t                ; scroll the *compilation* buffer window as output appears
       next-error-message-highlight t             ; highlight the current error message in the 'next-error' buffer
       confirm-kill-processes nil                 ; kill running processes on exit without warning
-      truncate-string-ellipsis "‚Ä¶"               ; use the unicode ellipsis for truncations
+      truncate-string-ellipsis "…"               ; use the unicode ellipsis for truncations
       ;; Info about auto completion in Emacs 29: https://robbmann.io/posts/emacs-29-completions.
       ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
       ;; completion-auto-select 'second-tab         ; added in Emacs 29 {nil, t, 'second-tab}
@@ -115,8 +115,7 @@
       auth-sources '("~/.authinfo" "~/.authinfo.gpg" macos-keychain-internet macos-keychain-generic)) ; tell auth-source where credentials can be found
 
 ;; Adjust global settings (functions).
-(prefer-coding-system 'utf-8)                    ; set the encoding to UTF8
-(recentf-mode t)                                 ; add 'Open Recent'-item to the 'File'-menu
+(setenv "LANG" "en_US.UTF-8")
 (electric-pair-mode t)                           ; autopair parens, brackets and quotes
 (delete-selection-mode t)                        ; overwrite selected text
 (global-auto-revert-mode t)                      ; update buffers when underlying files are changed externally
