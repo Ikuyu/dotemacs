@@ -34,7 +34,7 @@
 
 
 ;; Transparent background, excluding images and text (feature of Emacs 29):
-;; (when macos-p)
+;; (when my/macos-p)
 ;;   (setq default-frame-alist '((ns-transparent-titlebar . t) (ns-appearance . dark) (alpha . (80 . 75))))) ; or ( alpha-background . 0.9)
 ;; Emacs 29 has support for pixel scrolling:
 ;; (pixel-scroll-precision-mode)
@@ -115,7 +115,7 @@
       auth-sources '("~/.authinfo" "~/.authinfo.gpg" macos-keychain-internet macos-keychain-generic)) ; tell auth-source where credentials can be found
 
 ;; Adjust global settings (functions).
-(setenv "LANG" "en_US.UTF-8")
+(setenv "LANG" "en_US.UTF-8")                    ; make sure pbcopy/pbpaste (see below) uses utf8
 (electric-pair-mode t)                           ; autopair parens, brackets and quotes
 (delete-selection-mode t)                        ; overwrite selected text
 (global-auto-revert-mode t)                      ; update buffers when underlying files are changed externally
