@@ -592,13 +592,13 @@
 (use-package org-modern                 ; style headlines, keywords, tables and source blocks in org-mode
   :config
   (setq org-modern-star nil             ; {nil = hide the default org-modern symbols,
-	                                ; '("‚óâ" "‚óã" "‚óà" "‚óá" "‚ú≥"),
-					; '("‚ñè" "‚ñé" "‚ñç" "‚ñå" "‚ñã" "‚ñä" "‚ñâ" "‚ñà"),
-					; '("‚ñà" "‚ñâ" "‚ñä" "‚ñã" "‚ñå" "‚ñç" "‚ñé" "‚ñè")}
+	                                ; '("◉" "○" "◈" "◇" "✳"),
+					; '("▏" "▎" "▍" "▌" "▋" "▊" "▉" "█"),
+					; '("█" "▉" "▊" "▋" "▌" "▍" "▎" "▏")}
         org-modern-hide-stars t         ; {t = hide the default org-mode stars,
                                         ; nil = show the default org-mode stars}
 	org-modern-list '((45 . "-")
-			  (43 . "‚Ä¢")
+			  (43 . "•")
 			  (42 . "*"))
 	org-modern-table-vertical 1	; Prettify tables
 	org-modern-todo-faces '(("TODO"  :inverse-video t :inherit org-todo
