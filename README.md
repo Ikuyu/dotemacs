@@ -4,5 +4,5 @@ To be used with the [Railwaycat Emacs Mac Port](https://github.com/railwaycat/ho
 
 Remarks:
 
-- the `teletext-nos`-package needs the `Bitstream Vera Sans Mono` font
-- the default font used is `SF Mono`. To install it, follow the instructions [here](https://medium.com/@shashikant.jagtap/getting-apples-sf-mono-font-in-macos-1de5183add84).
+- the `teletext-nos` package depends on the `Bitstream Vera Sans Mono` font
+- if [installed](https://medium.com/@shashikant.jagtap/getting-apples-sf-mono-font-in-macos-1de5183add84), the font `SF Mono` is used.
