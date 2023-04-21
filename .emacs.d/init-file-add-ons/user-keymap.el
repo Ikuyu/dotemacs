@@ -33,7 +33,7 @@
 
 
 (define-prefix-command 'user-map)
-(global-set-key (kbd "s-u") 'user-map)                   ; add prefix key ‚åòu | Emacs 29: (keymap-global-set "s-u" 'user-map)
+(global-set-key (kbd "s-u") 'user-map)                   ; add prefix key ⌘u | Emacs 29: (keymap-global-set "s-u" 'user-map)
 (define-key user-map (kbd "b") (lambda ()
                                  (interactive)
                                  (if (and (package-installed-p 'boon) (not modus-tollens))
@@ -95,7 +95,9 @@
                                      (teletext)
                                    (message "Error enabeling Teletext:\n(Searching for program No such file or directory teletext)"))
                                  (if (package-installed-p 'teletext-nos)
-                                     (teletext-select-network "NOS")
+                                     (progn
+                                       (teletext-select-network "NOS")
+                                       (setq-local line-spacing 0.1))
                                    (message "Error enabeling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)"))))
 (define-key user-map (kbd "T") (lambda ()
 				 (interactive)
