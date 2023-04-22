@@ -77,12 +77,12 @@
 ;; -----------------
 ;; macOS keybindings
 ;; -----------------
-;; Remap macOS ‚å•- and ‚åò- and fn-key and add macos specific keybindings.
+;; Remap macOS ⌥- and ⌘- and fn-key and add macos specific keybindings.
 (when (my/macos-p)
-  (setq mac-command-modifier 'super ; use ‚åò-key as super-key
-        mac-option-modifier 'meta ; use ‚å•-key as meta-key
+  (setq mac-command-modifier 'super ; use ⌘-key as super-key
+        mac-option-modifier 'meta ; use ⌥-key as meta-key
         mac-function-modifier 'hyper ; use fn-key as hyper-key
-        mac-right-option-modifier 'none) ; use right ‚å•-key for special characters (e.g. √° √ü √© etc.)
+        mac-right-option-modifier 'none) ; use right ⌥-key for special characters (e.g. á ß é etc.)
   (when (not my/modus-tollens)
     (load (concat user-emacs-directory "init-file-add-ons/macos-keybindings.el"))))
 
