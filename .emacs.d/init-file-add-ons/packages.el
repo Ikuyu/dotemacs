@@ -161,7 +161,8 @@
   (setq gcmh-idle-delay 5
 	gcmh-high-cons-threshold (* 16 1024 1024)) ; 16mb
   (gcmh-mode 1)
-  :hook (emacs-startup . (lambda () (setq gc-cons-percentage 0.1))))
+  :hook (emacs-startup . (lambda ()
+                           (setq gc-cons-percentage 0.1))))
 
 
 
@@ -264,13 +265,6 @@
 
 
 
-;; ------------------------------
-;; Browse Teletext pages in Emacs
-;; ------------------------------
-(use-package teletext)
-
-
-
 ;; --------------------------------
 ;; Read NOS Teletext pages in Emacs
 ;; --------------------------------
@@ -279,7 +273,6 @@
   :quelpa (teletext-nos
            :fetcher github
            :repo "Ikuyu/emacs-teletext-nos")
-  :after teletext
   :init (require 'teletext-nos))
 
 
