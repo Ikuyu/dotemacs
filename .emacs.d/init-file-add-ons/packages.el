@@ -7,13 +7,13 @@
 ;; ---------------------
 ;; Bootstrap use-package
 ;; ---------------------
-(setq package-archives '(("melpa" . "https://melpa.org/packages/") ; add package repositories
+(setq package-archives '(("melpa" . "https://melpa.org/packages/") ; package repositories
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
-(package-initialize)
+(package-initialize) ; activate all the packages (in particular autoloads)
 
-(unless (package-installed-p 'use-package) ; obsolete in Emacs 29
+(unless (package-installed-p 'use-package) obsolete in Emacs 29
   (package-refresh-contents)
   (package-install 'use-package))
 
@@ -39,6 +39,8 @@
 ;; ---------
 ;; monokai-pro-theme:
 ;;   {'monokai-pro,'monokai-pro-classic,'monokai-pro-machine, 'monokai-pro-octagon,'monokai-pro-ristrettto,'emonokai-pro-spectrum}.
+;; alect-themes:
+;;   {'alect-black,'alect-black-alt,'alect-dark,'alect-dark-alt,'alect-light,'alect-light-alt}
 ;; gruvbox-theme:
 ;;   {'gruvbox-dark-medium,'gruvbox-dark-soft,'gruvbox-dark-hard, 'gruvbox-light-medium,'gruvbox-light-soft,'gruvbox-light-hard}
 ;; nofrils-acme-theme:
@@ -286,8 +288,25 @@
 ;; Fast jumping in visible text
 ;; ----------------------------
 (use-package avy
+  :defer t
   :config (avy-setup-default)
-  :bind (("M-j" . avy-goto-char-timer))) ; jump back in sequence with C-x C-SPC
+  :bind (("s-j" . avy-goto-char-timer))) ; jump back in sequence with C-x C-SPC
+
+
+
+;; ----------------------------
+;; Fast jumping between buffers
+;; ----------------------------
+(use-package frog-jump-buffer
+  :defer t
+  :config
+  (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$" "^\\:" "errors\\*$" "^\\*Backtrace" "-ls\\*$"
+                    "stderr\\*$" "^\\*Flymake" "^\\*vc" "^\\*Warnings" "checkout\\*$" "\\^*Shell Command"))
+    (push regexp frog-jump-buffer-ignore-buffers))
+  :bind (("s-b" . frog-jump-buffer )))
+
+(use-package frog-menu
+  :custom-face (frog-menu-posframe-background-face ((t (:background "#32302f")))))
 
 
 
@@ -516,6 +535,20 @@
 
 
 
+;; ----------------------------------
+;; behavior-driven Emacs lisp testing
+;; ----------------------------------
+(use-package buttercup)
+
+
+
+;; --------------------------------
+;; Test support functions for Emacs
+;; --------------------------------
+(use-package assess)
+
+
+
 ;; ----------------------------
 ;; Extend build-in IELM support
 ;; ----------------------------
@@ -668,7 +701,7 @@
    ("C-c n t" . org-roam-tag-add)
 
    :map org-mode-map
-   ("C-M-i"    . completion-at-point))
+   ("C-M-i" . completion-at-point))
   :config (org-roam-setup))
 
 
