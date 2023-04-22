@@ -36,7 +36,7 @@
 (global-set-key (kbd "s-u") 'user-map)                   ; add prefix key ⌘u | Emacs 29: (keymap-global-set "s-u" 'user-map)
 (define-key user-map (kbd "b") (lambda ()
                                  (interactive)
-                                 (if (and (package-installed-p 'boon) (not modus-tollens))
+                                 (if (and (package-installed-p 'boon) (not my/modus-tollens))
                                      (boon-mode 'toggle)
                                    (message "Error enabeling Boon:\n(Searching for program No such file or directory boon)"))
                                  ;;(setq cursor-type 'box)
