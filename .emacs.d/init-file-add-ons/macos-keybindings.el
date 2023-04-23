@@ -93,12 +93,15 @@
 ;; fn←                    - Home
 ;; fn→                    - End
 
+
+
 ;; ----------------------------------------
 ;; Keybindings based on the shortcuts above
 ;; ----------------------------------------
-(global-set-key (kbd "s-c") 'my/pasteboard-copy)    ; defined in global-settings.el
-(global-set-key (kbd "s-v") 'my/pasteboard-yank)    ; defined in global-settings.el
-(global-set-key (kbd "s-x") 'my/pasteboard-kill)    ; defined in global-settings.el
+(global-set-key (kbd "s-c") (kbd "M-w"))
+(global-set-key (kbd "s-v") (kbd "C-y"))
+(define-key isearch-mode-map (kbd "s-v") 'isearch-yank-kill)
+(global-set-key (kbd "s-x") (kbd "C-w"))
 (global-set-key (kbd "s-a") 'mark-whole-buffer)
 (global-set-key (kbd "s-z") 'undo)
 (global-set-key (kbd "s-Z") 'undo-redo)
@@ -112,9 +115,12 @@
 (global-set-key (kbd "s-m") 'iconify-frame)
 (global-set-key (kbd "s-q") 'save-buffers-kill-emacs)
 (global-set-key (kbd "s-.") 'keyboard-escape-quit) ; 'keyboard-quit
-(global-set-key (kbd "s-,") (lambda () (interactive) (customize-group 'mac)))
+(global-set-key (kbd "s-,") (lambda ()
+                              (interactive)
+                              (customize-group 'mac)))
 (global-set-key (kbd "s-l") 'goto-line)
-(global-set-key (kbd "s-k") (lambda () (interactive) (kill-buffer (current-buffer))))
+(global-set-key (kbd "s-k") (lambda ()
+                              (interactive) (kill-buffer (current-buffer))))
 (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
 (global-set-key (kbd "s-<down>") 'end-of-buffer)
 (global-set-key (kbd "s-<left>") 'beginning-of-visual-line)
