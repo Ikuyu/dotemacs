@@ -825,16 +825,13 @@
   ;;(meow-use-cursor-position-hack t)
   ;;(meow-goto-line-function 'consult-goto-line)
   :custom-face
-  (meow-normal-indicator ((t (:foreground nil :background "#000087")))) ; blue
-  (meow-motion-indicator ((t (:foreground nil :background "#8f3f71")))) ; purple
-  (meow-keypad-indicator ((t (:foreground nil :background "#af3a03")))) ; orange
-  (meow-insert-indicator ((t (:foreground nil :background "#9d0006")))) ; red
-  (meow-beacon-indicator ((t (:foreground nil :background "#005f5f")))) ; aqua
-  ;;:bind (("<backspace>" . ))
+  (meow-normal-indicator ((t (:foreground nil :background "#000087")))) ; gruvbox blue
+  (meow-motion-indicator ((t (:foreground nil :background "#8f3f71")))) ; gruvbox purple
+  (meow-keypad-indicator ((t (:foreground nil :background "#af3a03")))) ; gruvbox orange
+  (meow-insert-indicator ((t (:foreground nil :background "#9d0006")))) ; gruvbox red
+  (meow-beacon-indicator ((t (:foreground nil :background "#005f5f")))) ; gruvbox aqua
   :config
-  ;;(setq meow-use-dynamic-face-color nil) ; set colors in theme
-  ;;(setq meow--kbd-delete-char "<deletechar>")
-  (setq-default delete-active-region t)
+  (setq meow-expand-hint-remove-delay 2)
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     (meow-motion-overwrite-define-key
