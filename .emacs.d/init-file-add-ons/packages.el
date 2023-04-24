@@ -133,10 +133,10 @@
 (use-package gruvbox-theme
   :init (load-theme 'gruvbox-dark-medium t)
   :custom-face
-  ;; (avy-lead-face ((t (:foreground "#fbf1c7"))))
-  ;; (avy-lead-face-0 ((t (:foreground "#fbf1c7"))))
-  ;; (avy-lead-face-1 ((t (:foreground "#fbf1c7"))))
-  ;; (avy-lead-face-2 ((t (:foreground "#fbf1c7"))))
+  (avy-lead-face ((t (:foreground "#fbf1c7"))))
+  (avy-lead-face-0 ((t (:foreground "#fbf1c7"))))
+  (avy-lead-face-1 ((t (:foreground "#fbf1c7"))))
+  (avy-lead-face-2 ((t (:foreground "#fbf1c7"))))
   (isearch ((t (:foreground "#fbf1c7"))))
   ;;(lazy-highlight ((t (:foreground "#fbf1c7"))))
   (isearch-fail ((t (:foreground "#fbf1c7")))) ; gruvbox-dark0
