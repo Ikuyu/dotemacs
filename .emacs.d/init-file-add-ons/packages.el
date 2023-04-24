@@ -7,13 +7,13 @@
 ;; ---------------------
 ;; Bootstrap use-package
 ;; ---------------------
-(setq package-archives '(("melpa" . "https://melpa.org/packages/") ; package repositories
+(setq package-archives '(("melpa" . "https://melpa.org/packages/") ; add package repositories
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
-(package-initialize) ; activate all the packages (in particular autoloads)
+(package-initialize)
 
-(unless (package-installed-p 'use-package) obsolete in Emacs 29
+(unless (package-installed-p 'use-package) ; obsolete in Emacs 29
   (package-refresh-contents)
   (package-install 'use-package))
 
@@ -133,10 +133,10 @@
 (use-package gruvbox-theme
   :init (load-theme 'gruvbox-dark-medium t)
   :custom-face
-  (avy-lead-face ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-0 ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-1 ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-2 ((t (:foreground "#fbf1c7"))))
+  ;; (avy-lead-face ((t (:foreground "#fbf1c7"))))
+  ;; (avy-lead-face-0 ((t (:foreground "#fbf1c7"))))
+  ;; (avy-lead-face-1 ((t (:foreground "#fbf1c7"))))
+  ;; (avy-lead-face-2 ((t (:foreground "#fbf1c7"))))
   (isearch ((t (:foreground "#fbf1c7"))))
   ;;(lazy-highlight ((t (:foreground "#fbf1c7"))))
   (isearch-fail ((t (:foreground "#fbf1c7")))) ; gruvbox-dark0
@@ -269,7 +269,7 @@
 ;; ----------------------------
 ;; Fast jumping in visible text
 ;; ----------------------------
-(use-package avy
+(use-package avy ; an alternative is included in package 'meow' (see below)
   :defer t
   :config (avy-setup-default)
   :bind (("s-j" . avy-goto-char-timer))) ; jump back in sequence with C-x C-SPC
@@ -295,7 +295,7 @@
 ;; ------------------------------------------
 ;; Increase selected region by semantic units
 ;; ------------------------------------------
-(use-package expand-region
+(use-package expand-region          ; package 'meow' (see below) als it's own way of expanding a region
   :bind ("C-=" . er/expand-region)) ; press C-= once to enable this mode
 
 
@@ -305,7 +305,7 @@
 ;; ----------------------------------------------
 (use-package embrace
   :config
-  (setq embrace-show-help-p t) ; show/hide the help message
+  (setq embrace-show-help-p t)      ; show/hide the help message
   (add-hook 'org-mode-hook 'embrace-org-mode-hook)
   :bind ("C-," . embrace-commander))
 
@@ -364,7 +364,7 @@
 ;; -------------------------------------------
 ;; Disallow *scratch* buffer from being killed
 ;; -------------------------------------------
-(use-package unkillable-scratch         ; Emacs 29: use the command 'scratch-buffer' to switch to this buffer or create a new one if it has been deleted
+(use-package unkillable-scratch     ; Emacs 29: use the command 'scratch-buffer' to switch to this buffer or create a new one if it has been deleted
   :config (unkillable-scratch t))
 
 
@@ -513,7 +513,7 @@
               ("C-c C-d" . eval-defun)
               ("C-c C-l" . emacs-lisp-byte-compile-and-load)
               ("C-c C-r" . eval-region)
-              ("C-c C-t" . ert)))         ; run test
+              ("C-c C-t" . ert)))   ; run test
 
 
 
@@ -578,10 +578,10 @@
 ;; Edit multiple occurrences simultaneously
 ;; ----------------------------------------
 ;; https://www.youtube.com/watch?v=3O-bDYqhFos
-(use-package multiple-cursors		; alternatives: iedit, macrursors
-  :if (not my/modus-tollens)
-  :init (setq mc/always-run-for-all t)
-  :bind ("S-s-<mouse-1>" . mc/add-cursor-on-click))
+;; (use-package multiple-cursors       ; alternatives: 'iedit', 'macrursors' or 'meow' (see below)
+;;   :if (not my/modus-tollens)
+;;   :init (setq mc/always-run-for-all t)
+;;   :bind ("S-s-<mouse-1>" . mc/add-cursor-on-click))
 
 
 
@@ -719,3 +719,204 @@
 ;; -----------------------------------------------------
 (use-package pandoc-mode
   :after org)
+
+
+
+;; ----------------------
+;; Ergonomic command mode
+;; ----------------------
+(use-package meow
+  :if (not my/modus-tollens)
+  :defer t
+  :init
+  (require 'meow)
+  (setq meow-replace-state-name-list '((normal . "CMD")   ; command state
+                                       (motion . "MOT")   ; motion state
+                                       (keypad . "KPD")   ; keypad state
+                                       (insert . "INS")   ; insert state
+                                       (beacon . "BCN"))) ; beacon state
+  (setq-default mode-line-format '((:eval (meow-indicator))
+                                "%e"
+                                (:eval (let*
+                                           ((active
+                                             (powerline-selected-window-active))
+                                            (mode-line-buffer-id
+                                             (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
+                                            (mode-line
+                                             (if active 'mode-line 'mode-line-inactive))
+                                            (face0
+                                             (if active 'powerline-active0 'powerline-inactive0))
+                                            (face1
+                                             (if active 'powerline-active1 'powerline-inactive1))
+                                            (face2
+                                             (if active 'powerline-active2 'powerline-inactive2))
+                                            (separator-left
+                                             (intern
+                                              (format "powerline-%s-%s"
+                                                      (powerline-current-separator)
+                                                      (car powerline-default-separator-dir))))
+                                            (separator-right
+                                             (intern
+                                              (format "powerline-%s-%s"
+                                                      (powerline-current-separator)
+                                                      (cdr powerline-default-separator-dir))))
+                                            (lhs
+                                             (list
+                                              (when (bound-and-true-p meow-global-mode)
+                                                (let* ((state (meow--current-state))
+                                                       (indicator-face (alist-get state meow-indicator-face-alist)))
+                                                  (funcall separator-left indicator-face face0)))
+                                              (powerline-raw "%*" face0 'l)
+                                              (when powerline-display-buffer-size
+                                                (powerline-buffer-size face0 'l))
+                                              (when powerline-display-mule-info
+                                                (powerline-raw mode-line-mule-info face0 'l))
+                                              (powerline-buffer-id
+                                               `(mode-line-buffer-id ,face0)
+                                               'l)
+                                              (when
+                                                  (and
+                                                   (boundp 'which-func-mode)
+                                                   which-func-mode)
+                                                (powerline-raw which-func-format face0 'l))
+                                              (powerline-raw " " face0)
+                                              (funcall separator-left face0 face1)
+                                              (when
+                                                  (and
+                                                   (boundp 'erc-track-minor-mode)
+                                                   erc-track-minor-mode)
+                                                (powerline-raw erc-modified-channels-object face1 'l))
+                                              (powerline-major-mode face1 'l)
+                                              (powerline-process face1)
+                                              (powerline-minor-modes face1 'l)
+                                              (powerline-narrow face1 'l)
+                                              (powerline-raw " " face1)
+                                              (funcall separator-left face1 face2)
+                                              (powerline-vc face2 'r)
+                                              (when
+                                                  (bound-and-true-p nyan-mode)
+                                                (powerline-raw
+                                                 (list
+                                                  (nyan-create))
+                                                 face2 'l))))
+                                            (rhs
+                                             (list
+                                              (powerline-raw global-mode-string face2 'r)
+                                              (funcall separator-right face2 face1)
+                                              (unless window-system
+                                                (powerline-raw
+                                                 (char-to-string 57505)
+                                                 face1 'l))
+                                              (powerline-raw "%4l" face1 'l)
+                                              (powerline-raw ":" face1 'l)
+                                              (powerline-raw "%4c" face1 'r)
+                                              (funcall separator-right face1 face0)
+                                              (powerline-raw " " face0)
+                                              (powerline-raw "%6p" face0 'r)
+                                              (when powerline-display-hud
+                                                (powerline-hud face0 face2))
+                                              (powerline-fill face0 0))))
+                                         (concat
+                                          (powerline-render lhs)
+                                          (powerline-fill face2
+                                                          (powerline-width rhs))
+                                          (powerline-render rhs))))))
+  ;;:custom
+  ;;(meow-use-cursor-position-hack t)
+  ;;(meow-goto-line-function 'consult-goto-line)
+  :custom-face
+  (meow-normal-indicator ((t (:foreground nil :background "#000087")))) ; blue
+  (meow-motion-indicator ((t (:foreground nil :background "#8f3f71")))) ; purple
+  (meow-keypad-indicator ((t (:foreground nil :background "#af3a03")))) ; orange
+  (meow-insert-indicator ((t (:foreground nil :background "#9d0006")))) ; red
+  (meow-beacon-indicator ((t (:foreground nil :background "#005f5f")))) ; aqua
+  :config
+  ;;(setq meow-use-dynamic-face-color nil) ; set colors in theme
+  ;;(setq meow--kbd-delete-char "<deletechar>")
+  (defun meow-setup ()
+    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    (meow-motion-overwrite-define-key
+     '("j" . meow-next)
+     '("k" . meow-prev)
+     '("<escape>" . ignore))
+    (meow-leader-define-key
+     ;; SPC j/k will run the original command in MOTION state.
+     '("j" . "H-j")
+     '("k" . "H-k")
+     ;; Use SPC (0-9) for digit arguments.
+     '("1" . meow-digit-argument)
+     '("2" . meow-digit-argument)
+     '("3" . meow-digit-argument)
+     '("4" . meow-digit-argument)
+     '("5" . meow-digit-argument)
+     '("6" . meow-digit-argument)
+     '("7" . meow-digit-argument)
+     '("8" . meow-digit-argument)
+     '("9" . meow-digit-argument)
+     '("0" . meow-digit-argument)
+     '("/" . meow-keypad-describe-key)
+     '("?" . meow-cheatsheet))
+    (meow-normal-define-key
+     '("0" . meow-expand-0)
+     '("9" . meow-expand-9)
+     '("8" . meow-expand-8)
+     '("7" . meow-expand-7)
+     '("6" . meow-expand-6)
+     '("5" . meow-expand-5)
+     '("4" . meow-expand-4)
+     '("3" . meow-expand-3)
+     '("2" . meow-expand-2)
+     '("1" . meow-expand-1)
+     '("-" . negative-argument)
+     '(";" . meow-reverse)
+     '("," . meow-inner-of-thing)
+     '("." . meow-bounds-of-thing)
+     '("[" . meow-beginning-of-thing)
+     '("]" . meow-end-of-thing)
+     '("a" . meow-append)
+     '("A" . meow-open-below)
+     '("b" . meow-back-word)
+     '("B" . meow-back-symbol)
+     '("c" . meow-change)
+     '("d" . meow-delete)
+     '("D" . meow-backward-delete)
+     '("e" . meow-next-word)
+     '("E" . meow-next-symbol)
+     '("f" . meow-find)
+     '("g" . meow-cancel-selection)
+     '("G" . meow-grab)
+     '("h" . meow-left)
+     '("H" . meow-left-expand)
+     '("i" . meow-insert)
+     '("I" . meow-open-above)
+     '("j" . meow-next)
+     '("J" . meow-next-expand)
+     '("k" . meow-prev)
+     '("K" . meow-prev-expand)
+     '("l" . meow-right)
+     '("L" . meow-right-expand)
+     '("m" . meow-join)
+     '("n" . meow-search)
+     '("o" . meow-block)
+     '("O" . meow-to-block)
+     '("p" . meow-yank)
+     '("q" . meow-quit)
+     '("Q" . meow-goto-line)
+     '("r" . meow-replace)
+     '("R" . meow-swaap-grab)
+     '("s" . meow-kill)
+     '("t" . meow-till)
+     '("u" . meow-undo)
+     '("U" . meow-undo-in-selection)
+     '("v" . meow-visit)
+     '("w" . meow-mark-word)
+     '("W" . meow-mark-symbol)
+     '("x" . meow-line)
+     '("X" . meow-goto-line)
+     '("y" . meow-save)
+     '("Y" . meow-sync-grab)
+     '("z" . meow-pop-selection)
+     '("'" . repeat)
+     '("<escape>" . ignore)))
+  (meow-setup)
+  (meow-setup-indicator))
