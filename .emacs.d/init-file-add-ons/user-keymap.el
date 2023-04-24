@@ -55,9 +55,9 @@
                                      (progn
                                        (meow-setup-indicator)
                                        (meow-global-mode 'toggle)
-                                       (setq-default delete-active-region t)
-                                       (when (not meow-global-mode)
-                                           (setq cursor-type 'bar)))
+                                       (if meow-global-mode
+                                           (setq-default delete-active-region t)
+                                         (setq cursor-type 'bar))))))
                                    (message "Error enabling Meow:\n(Searching for program No such file or directory meow)"))))
 (define-key user-map (kbd "M") (lambda ()
                                  (interactive)
