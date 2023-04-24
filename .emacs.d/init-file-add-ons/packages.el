@@ -28,7 +28,10 @@
 ;; ------------------------------------------
 ;; Use Quelpa to install packages from source
 ;; ------------------------------------------
-(use-package quelpa)		      ; obsolete in: emacs 29. Use package-vc-install instead
+(use-package quelpa		      ; obsolete in: emacs 29. Use package-vc-install instead
+  :defer t
+  ;;:custom (quelpa-upgrade-p t "Always try to update packages") ; see: 'auto-package-update'
+  )
 
 (use-package quelpa-use-package)      ; example: (package-vc-install '(combobulate :url "https://github.com/mickeynp/combobulate"))
 
@@ -181,10 +184,11 @@
 ;; Kep installed packages up-to-date
 ;; ----------------------------------
 (use-package auto-package-update        ; Emacs 29: use the command 'package-update-all'
+  :defer t
   :custom
   (auto-package-update-prompt-before-update t)
-  (auto-package-update-delete-old-versions t)
-  (auto-package-update-hide-results t))
+  (auto-package-update-delete-old-versions t)  ; delete residual old versions
+  (auto-package-update-hide-results t))        ; do not bother me when updates have taken place
 
 
 
@@ -209,21 +213,6 @@
 	   :fetcher github
 	   :repo "purcell/disable-mouse")
   :config (global-disable-mouse-mode t))
-
-
-
-;; ----------------------
-;; Ergonomic command mode
-;; ----------------------
-(use-package boon                      ; boon set the default cursor type to 'bar
-  :if (not my/modus-tollens)
-  :config
-  (require 'boon-qwerty)
-  (require 'boon-powerline)
-  (boon-powerline-theme)
-  ;;(boon-mode)                          ; enable/disble with 's-u b' (see user-keymap.el)
-  :bind (("C-g" . 'boon-set-command-state) ; or: ("C-g" . [escape])
-  ))
 
 
 
@@ -585,11 +574,11 @@
 
 
 
-; ----------------------------------------
+; -----------------------------------------
 ;; Edit multiple occurrences simultaneously
 ;; ----------------------------------------
 ;; https://www.youtube.com/watch?v=3O-bDYqhFos
-(use-package multiple-cursors		; alternative iedit
+(use-package multiple-cursors		; alternatives: iedit, macrursors
   :if (not my/modus-tollens)
   :init (setq mc/always-run-for-all t)
   :bind ("S-s-<mouse-1>" . mc/add-cursor-on-click))
@@ -692,7 +681,6 @@
    ("C-c n l" . org-roam-buffer-toggle)
    ("C-c n o" . org-id-get-create)
    ("C-c n t" . org-roam-tag-add)
-
    :map org-mode-map
    ("C-M-i" . completion-at-point))
   :config (org-roam-setup))
