@@ -1,4 +1,4 @@
-;;; ========
+; ========
 ;;; Packages
 ;;; ========
 
@@ -133,14 +133,14 @@
 (use-package gruvbox-theme
   :init (load-theme 'gruvbox-dark-medium t)
   :custom-face
-  (avy-lead-face ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-0 ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-1 ((t (:foreground "#fbf1c7"))))
-  (avy-lead-face-2 ((t (:foreground "#fbf1c7"))))
-  (isearch ((t (:foreground "#fbf1c7"))))
-  ;;(lazy-highlight ((t (:foreground "#fbf1c7"))))
-  (isearch-fail ((t (:foreground "#fbf1c7")))) ; gruvbox-dark0
-  (powerline-inactive2 ((t (:background "#32302f"))))) ; gruvbox-light-medium: #f2e5bc gruvbox-dark-medium: #32302f (gruvbox-dark0_soft)
+  (avy-lead-face ((nil (:foreground "#fbf1c7"))))
+  (avy-lead-face-0 ((nil (:foreground "#fbf1c7"))))
+  (avy-lead-face-1 ((nil (:foreground "#fbf1c7"))))
+  (avy-lead-face-2 ((nil (:foreground "#fbf1c7"))))
+  (isearch ((nil (:foreground "#fbf1c7"))))
+  (lazy-highlight ((t (:foreground "#fbf1c7"))))
+  (isearch-fail ((nil (:foreground "#fbf1c7")))) ; gruvbox-dark0
+  (powerline-inactive2 ((nil (:background "#32302f"))))) ; gruvbox-light-medium: #f2e5bc gruvbox-dark-medium: #32302f (gruvbox-dark0_soft)
 
 
 
@@ -288,7 +288,7 @@
   :bind (("s-b" . frog-jump-buffer )))
 
 (use-package frog-menu
-  :custom-face (frog-menu-posframe-background-face ((t (:background "#32302f")))))
+  :custom-face (frog-menu-posframe-background-face ((nil (:background "#32302f")))))
 
 
 
@@ -822,15 +822,15 @@
                                                           (powerline-width rhs))
                                           (powerline-render rhs))))))
   ;;:custom
-  ;;(meow-use-cursor-position-hack t)
+  ;;(cursor-position-hack t)
   ;;(meow-goto-line-function 'consult-goto-line)
-  :custom-face
-  (meow-normal-indicator ((t (:foreground nil :background "#000087")))) ; gruvbox blue
-  (meow-motion-indicator ((t (:foreground nil :background "#8f3f71")))) ; gruvbox purple
-  (meow-keypad-indicator ((t (:foreground nil :background "#af3a03")))) ; gruvbox orange
-  (meow-insert-indicator ((t (:foreground nil :background "#9d0006")))) ; gruvbox red
-  (meow-beacon-indicator ((t (:foreground nil :background "#005f5f")))) ; gruvbox aqua
   :config
+  (when (string-match-p "gruvbox.*" (symbol-name (car custom-enabled-themes)))
+    (set-face-attribute 'meow-normal-indicator nil :foreground "#fbf1c7" :background "#000087")
+    (set-face-attribute 'meow-motion-indicator nil :foreground "#fbf1c7" :background "#8f3f71")
+    (set-face-attribute 'meow-keypad-indicator nil :foreground "#fbf1c7" :background "#af3a03")
+    (set-face-attribute 'meow-insert-indicator nil :foreground "#fbf1c7" :background "#9d0006")
+    (set-face-attribute 'meow-beacon-indicator nil :foreground "#fbf1c7" :background "#005f5f"))
   (setq meow-expand-hint-remove-delay 2)
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
