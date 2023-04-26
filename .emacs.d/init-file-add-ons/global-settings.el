@@ -12,30 +12,31 @@
 ;;
 ;; Copyright (C) 2023 Edwin H. Jonkvorst.
 ;;
-;; Permission is hereby granted, free of charge, to any person obtaining
-;; a copy of this software and associated documentation files (the
-;; "Software"), to deal in the Software without restriction, including
-;; without limitation the rights to use, copy, modify, merge, publish,
-;; distribute, sublicense, and/or sell copies of the Software, and to
-;; permit persons to whom the Software is furnished to do so, subject to
-;; the following conditions:
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to
+;; deal in the Software without restriction, including without limitation the
+;; rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+;; sell copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
 ;;
-;; The above copyright notice and this permission notice shall be
-;; included in all copies or substantial portions of the Software.
+;; The above copyright notice and this permission notice shall be included in
+;; all copies or substantial portions of the Software.
 ;;
-;; The Software Is Provided "As Is", Without Warranty Of ANY KIND,
-;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;; The Software Is Provided "As Is", Without Warranty Of ANY KIND, EXPRESS OR
+;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+;; IN THE SOFTWARE.
 
 
 
 ;; Transparent background, excluding images and text (feature of Emacs 29):
 ;; (when my/macos-p)
-;;   (setq default-frame-alist '((ns-transparent-titlebar . t) (ns-appearance . dark) (alpha . (80 . 75))))) ; or ( alpha-background . 0.9)
+;;   (setq default-frame-alist '((ns-transparent-titlebar . t)
+;;                               (ns-appearance . dark)
+;;                               (alpha . (80 . 75))))) ; or ( alpha-background . 0.9)
 ;; Emacs 29 has support for pixel scrolling:
 ;; (pixel-scroll-precision-mode)
 
@@ -45,7 +46,8 @@
 ;; - mouse
 ;; - macos-keybindings
 ;; - user-keymap
-;; - arrow, end, home and delete keys as well as their control and meta prefixes
+;; - arrow, end, home and delete keys as well as their control and met
+;;   prefixes
 ;; - macOS specific undo/redo behavior.
 (defvar my/modus-tollens nil)
 
@@ -62,11 +64,11 @@
 (setq-default case-fold-search nil               ; enable case-sensitive search & replace
 	      indent-tabs-mode nil   		 ; never mix tabs and spaces, never use tabs
               cursor-type 'bar
+              word-wrap t
               fill-column 79)                    ; used in auto-fill-mode, ignored in visual-line-mode
 
 ;; Adjust global settings (variables).
-(setq
-      electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
+(setq electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
       fast-but-imprecise-scrolling t             ; accelerate scrolling operations
       inhibit-compacting-font-caches t           ; don’t compact font caches during garbage collection
       save-interprogram-paste-before-kill t      ; ensure that Emacs kill operations do not irrevocably overwrite existing clipboard text
@@ -105,7 +107,8 @@
       next-error-message-highlight t             ; highlight the current error message in the 'next-error' buffer
       confirm-kill-processes nil                 ; kill running processes on exit without warning
       truncate-string-ellipsis "…"               ; use the unicode ellipsis for truncations
-      ;; Info about auto completion in Emacs 29: https://robbmann.io/posts/emacs-29-completions.
+      ;; Info about auto completion in Emacs 29:
+      ;; https://robbmann.io/posts/emacs-29-completions.
       ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
       ;; completion-auto-select 'second-tab         ; added in Emacs 29 {nil, t, 'second-tab}
       ;; (define-key minibuffer-local-map (kbd "C-p") #'minibuffer-previous-completion)          ; up when completing in the minibuffer
@@ -122,16 +125,16 @@
 (global-auto-revert-mode t)                      ; update buffers when underlying files are changed externally
 (save-place-mode)		                 ; when visiting a file, point goessavehist-mode to the last place where it was before
 (tooltip-mode -1)                                ; show tooltips in the minibuffer
-(global-visual-line-mode t)
 
 (defadvice load-theme (before clear-previous-themes activate)
   "Clear existing theme settings instead of layering them."
   (mapc #'disable-theme custom-enabled-themes))
 
-;; By default Emacs uses a monospaced (fixed-pitch) font designed for writing code.
-;; In a fixed-pitch font all the characters have the same with, whether an i or an m,
-;; just like an old mechanical typewriter. This helps to align the lines of code/text.
-;; On macOS use 'SF Mono' when available: https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
+;; By default Emacs uses a monospaced (fixed-pitch) font designed for writing
+;; code. In a fixed-pitch font all the characters have the same with, whether
+;; an i or an m, just like an old mechanical typewriter. This helps to align
+;; the lines of code/text. On macOS use 'SF Mono' when available:
+;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
 (when (and (my/macos-p) (find-font (font-spec :name "SF Mono")))
   (set-face-attribute 'default nil :font "SF Mono" :height 160 :weight 'light)
   (setq-default line-spacing 0.3))	         ; hide new messages in the bufferlist instead of popping up
@@ -139,11 +142,13 @@
 ;; Hooks.
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespace on save
 ;;(add-hook 'prog-mode-hook 'turn-on-auto-fill)
-
+(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+(set-face-foreground 'fill-column-indicator "#9d0006")
 ;; --------------------------------------
 ;; Adjust default copy/yank/kill behavior
 ;; --------------------------------------
-;; On Linux, add the following lines to your .zshrc/.bashrc for a macOS pbcopy/pbpaste like experience
+;; On Linux, add the following lines to your .zshrc/.bashrc for a macOS
+;; pbcopy/pbpaste like experience:
 ;; alias pbcopy='xsel --clipboard --input'
 ;; alias pbpaste='xsel --clipboard --output'
 (defun my/keep-mark-active-after-copy-region-as-kill (&rest args)
@@ -177,6 +182,3 @@ function that sets `deactivate-mark' to t."
 (global-set-key (kbd "M-w") 'my/pasteboard-copy)
 (global-set-key (kbd "C-y") 'my/pasteboard-yank)
 (global-set-key (kbd "C-w") 'my/pasteboard-kill)
-
-;; Create allias for M-q (fill-paragraph)
-;;(global-set-key (kbd "s-SPC") (kbd "M-q")) ; ⌘⇧SPACE
