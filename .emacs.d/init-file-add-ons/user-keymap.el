@@ -34,6 +34,18 @@
 
 (define-prefix-command 'user-map)
 (global-set-key (kbd "s-u") 'user-map)                   ; add prefix key ⌘u | Emacs 29: (keymap-global-set "s-u" 'user-map)
+(define-key user-map (kbd "a") (lambda ()
+				 (interactive)
+                                 (if (package-installed-p 'heaven-and-hell)
+                                     (progn
+                                       (heaven-and-hell-toggle-theme)
+                                       (powerline-reset)
+                                       (set-face-attribute 'powerline-inactive2 nil :background (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
+                                                                                                    "#32302f"
+                                                                                                  "#f2e5bc"))
+
+                                       )
+                                   (message "Error enabling Heaven and Hell:\n(Searching for program No such file or directory heaven-and-hell)"))))
 (define-key user-map (kbd "d") 'dired)
 (define-key user-map (kbd "e") (lambda ()                ; to kill the ERC buffer and terminate its child process use C-x k
 				 (interactive)
@@ -57,14 +69,14 @@
                                        (meow-global-mode 'toggle)
                                        (if meow-global-mode
                                            (setq-default delete-active-region t)
-                                         (setq cursor-type 'bar))))))
+                                         (setq cursor-type 'bar)))
                                    (message "Error enabling Meow:\n(Searching for program No such file or directory meow)"))))
 (define-key user-map (kbd "M") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'magit)
                                      (magit)
                                    (message "Error enabling Magit:\n(Searching for program No such file or directory magit)"))))
-(define-key user-map (kbd "N") (lambda ()
+(define-key user-map (kbd "n") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'nov)
                                      (nov-mode)
