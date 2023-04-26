@@ -11,24 +11,23 @@
 ;;
 ;; Copyright (C) 2023 Edwin H. Jonkvorst.
 ;;
-;; Permission is hereby granted, free of charge, to any person obtaining
-;; a copy of this software and associated documentation files (the
-;; "Software"), to deal in the Software without restriction, including
-;; without limitation the rights to use, copy, modify, merge, publish,
-;; distribute, sublicense, and/or sell copies of the Software, and to
-;; permit persons to whom the Software is furnished to do so, subject to
-;; the following conditions:
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to
+;; deal in the Software without restriction, including without limitation the
+;; rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+;; sell copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
 ;;
-;; The above copyright notice and this permission notice shall be
-;; included in all copies or substantial portions of the Software.
+;; The above copyright notice and this permission notice shall be included in
+;; all copies or substantial portions of the Software.
 ;;
-;; The Software Is Provided "As Is", Without Warranty Of ANY KIND,
-;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;; The Software Is Provided "As Is", Without Warranty Of ANY KIND, EXPRESS OR
+;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+;; IN THE SOFTWARE.
 
 
 
@@ -88,13 +87,17 @@
 ;; The standard-, ef- and the modus-themes are the work of Protesilaos Stavrou.
 ;; Prot is one of the offical Emacs built-in themes creators/maintainers).
 
-;; The standard-themes are a pair of light and dark themes for GNU Emacs. They emulate the out-of-the-box looks of Emacs
-;; (which technically do NOT constitute a theme) while bringing to them thematic consistency, customizability, and extensibility.
-;; In practice, the Standard themes take the default style of the font-lock and Org faces, complement it with a wider colour palette,
-;; address some inconsistencies, and apply established semantic patterns across all interfaces.
+;; The standard-themes are a pair of light and dark themes for GNU Emacs. They
+;; emulate the out-of-the-box looks of Emacs (which technically do NOT
+;; constitute a theme) while bringing to them thematic consistency,
+;; customizability, and extensibility. In practice, the Standard themes take
+;; the default style of the font-lock and Org faces, complement it with a wider
+;; colour palette, address some inconsistencies, and apply established semantic
+;; patterns across all interfaces.
 
-;; The modus-themes are (updated) variations of the modus-operandi and modus-vivendi themes (included in Emacs since August 2020)
-;; that will be merged with Emacs 30.
+;; The modus-themes are (updated) variations of the modus-operandi and
+;; modus-vivendi themes (included in Emacs since August 2020) that will be
+;; merged with Emacs 30.
 
 ;; Some great build-in themes: {'wheatgrass,'light-blue}.
 
@@ -198,9 +201,10 @@
 
 
 
-;; ---------------------------------------------------------------------------------
-;; Enforce sneaky garbage collection to minimize interference with the user activity
-;; ---------------------------------------------------------------------------------
+;; ------------------------------------------------------------------------
+;; Enforce sneaky garbage collection to minimize interference with the user
+;; activity
+;; ------------------------------------------------------------------------
 (use-package gcmh
   :diminish gcmh-mode
   :config
@@ -212,9 +216,10 @@
 
 
 
-;; ------------------------------------------------------------------------------------------------------
-;; Get environment variables inside Emacs (probaly not nescessary when using the Emacs Railwaycat's port)
-;; ------------------------------------------------------------------------------------------------------
+;; -------------------------------------------------------------------------
+;; Get environment variables inside Emacs (probaly not nescessary when using
+;; the Emacs Railwaycat's port)
+;; -------------------------------------------------------------------------
 (use-package exec-path-from-shell
   :if (my/macos-p)
   :hook (emacs-startup . (lambda ()
@@ -235,9 +240,10 @@
 
 
 
-;; ----------------------------------------------------------------------------------------
-;; Disable the arrow, end, home and delete keys, as well as their control and meta prefixes
-;; ----------------------------------------------------------------------------------------
+;; --------------------------------------------------------------------------
+;; Disable the arrow, end, home and delete keys, as well as their control and
+;; meta prefixes
+;; --------------------------------------------------------------------------
 (use-package no-easy-keys		; force using the proper Emacs movement keys
   :if my/modus-tollens
   :quelpa (no-easy-keys
@@ -289,9 +295,10 @@
 
 
 
-;; -------------------------------------------------------------------------------------------------------------
-;; Highlight keywords in comments: TODO FIXME NEXT THEM DONE FAIL NOTE OKAY PROG DONT TEMP KLUDGE THEM HACK XXXX
-;; -------------------------------------------------------------------------------------------------------------
+;; ------------------------------------------------------------------------
+;; Highlight keywords in comments: TODO FIXME NEXT THEM DONE FAIL NOTE OKAY
+;; PROG DONT TEMP KLUDGE THEM HACK XXXX
+;; ------------------------------------------------------------------------
 (use-package hl-todo
   :defer t
   :init (global-hl-todo-mode t))
@@ -731,9 +738,10 @@
 
 
 
-;; ---------------------------------------------------------------------------------------------------------------
-;; Browse the notes network in an interactive graph in the browser to remember certain relationships between notes
-;; ---------------------------------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------
+;; Browse the notes network in an interactive graph in the browser to remember
+;; certain relationships between notes
+;; ---------------------------------------------------------------------------
 (use-package org-roam-ui
   :after org-roam
   :config
