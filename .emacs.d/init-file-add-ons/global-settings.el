@@ -109,7 +109,7 @@
       truncate-string-ellipsis "…"               ; use the unicode ellipsis for truncations
       ;; Info about auto completion in Emacs 29:
       ;; https://robbmann.io/posts/emacs-29-completions.
-      ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
+a      ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
       ;; completion-auto-select 'second-tab         ; added in Emacs 29 {nil, t, 'second-tab}
       ;; (define-key minibuffer-local-map (kbd "C-p") #'minibuffer-previous-completion)          ; up when completing in the minibuffer
       ;; (define-key minibuffer-local-map (kbd "C-n") #'minibuffer-next-completion)              ; down when completing in the minibuffer`'
@@ -143,7 +143,10 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespace on save
 ;;(add-hook 'prog-mode-hook 'turn-on-auto-fill)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+
+;; Faces.
 (set-face-foreground 'fill-column-indicator "#9d0006")
+
 ;; --------------------------------------
 ;; Adjust default copy/yank/kill behavior
 ;; --------------------------------------
