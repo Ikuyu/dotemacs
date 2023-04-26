@@ -44,11 +44,10 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(eval-when-compile                         ; obsolete in Emacs 29
-  (setq use-package-always-ensure t        ; specify ':ensure nil' for internal packages/libraries
-        load-prefer-newer t
-        use-package-expand-minimally t     ; make the byte-compiled file as minimal as possible
-        warning-minimum-level :emergency)) ; when using Emacs 29 these settings can be moved to to global-setting.el
+(setq use-package-always-ensure t        ; specify ':ensure nil' for internal packages/libraries
+      load-prefer-newer t
+      use-package-expand-minimally t     ; make the byte-compiled file as minimal as possible
+      warning-minimum-level :emergency); ; when using Emacs 29 these settings can be moved to to global-setting.el
 
 
 
@@ -171,6 +170,7 @@
   (isearch-fail ((nil (:foreground "#ffdfaf"))))
   (powerline-inactive2 ((nil (:background "#f2e5bc"))))
   :config
+  ;;(set-face-foreground 'fill-column-indicator "#9d0006")
   (set-face-foreground 'lazy-highlight (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
                                            "#ffdfaf"
                                          "#3a3a3a")))
