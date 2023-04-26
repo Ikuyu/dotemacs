@@ -3,6 +3,34 @@
 ;;; ========
 
 
+;; Author: Edwin H. Jonkvorst <hetlevenkronen@gmail.com>.
+;; Keywords: internal, emacs config.
+;; This file is NOT part of GNU Emacs.
+;;
+;; The MIT Licence (MIT)
+;;
+;; Copyright (C) 2023 Edwin H. Jonkvorst.
+;;
+;; Permission is hereby granted, free of charge, to any person obtaining
+;; a copy of this software and associated documentation files (the
+;; "Software"), to deal in the Software without restriction, including
+;; without limitation the rights to use, copy, modify, merge, publish,
+;; distribute, sublicense, and/or sell copies of the Software, and to
+;; permit persons to whom the Software is furnished to do so, subject to
+;; the following conditions:
+;;
+;; The above copyright notice and this permission notice shall be
+;; included in all copies or substantial portions of the Software.
+;;
+;; The Software Is Provided "As Is", Without Warranty Of ANY KIND,
+;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 
 ;; ---------------------
 ;; Bootstrap use-package
@@ -236,9 +264,10 @@
 ;; ------------------------------------
 (use-package olivetti
   :defer t
+  :custom
+  (olivetti-body-width 70) ; ideal for reading text
   :config
   (setq ;;olivetti-body-width 0.65
-        olivetti-minimum-body-width fill-column
         ;;olivetti-recall-visual-line-mode-entry-state t
         olivetti-style nil))
 
