@@ -12,28 +12,29 @@
 ;;
 ;; Copyright (C) 2023 Edwin H. Jonkvorst.
 ;;
-;; Permission is hereby granted, free of charge, to any person obtaining
-;; a copy of this software and associated documentation files (the
-;; "Software"), to deal in the Software without restriction, including
-;; without limitation the rights to use, copy, modify, merge, publish,
-;; distribute, sublicense, and/or sell copies of the Software, and to
-;; permit persons to whom the Software is furnished to do so, subject to
-;; the following conditions:
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to
+;; deal in the Software without restriction, including without limitation the
+;; rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+;; sell copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
 ;;
-;; The above copyright notice and this permission notice shall be
-;; included in all copies or substantial portions of the Software.
+;; The above copyright notice and this permission notice shall be included in
+;; all copies or substantial portions of the Software.
 ;;
-;; The Software Is Provided "As Is", Without Warranty Of ANY KIND,
-;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;; The Software Is Provided "As Is", Without Warranty Of ANY KIND, EXPRESS OR
+;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+;; IN THE SOFTWARE.
 
-;; To start Emacs in fullscreen mode, create an Automator script with the argument -fs.
+;; To start Emacs in fullscreen mode, create an Automator script with the
+;; argument -fs.
 
-;; The early init file uses strictly built-in Emacs features to do the following:
+;; The early init file uses strictly built-in Emacs features to do the
+;; following:
 ;; - Improve startup time
 ;; - Set up initial frame behavior
 
@@ -53,4 +54,4 @@
       comp-deferred-compilation nil                   ; prevent unwanted runtime builds
       frame-inhibit-implied-resize t                  ; don't resize the frame in order to preserve the number of columns or lines it displays
       frame-resize-pixelwise t                        ; resize pixelwise, not character-wise
-      package-enable-at-startup nil)                  ; we want to use use-package, not the default emacs behavior
+      package-enable-at-startup nil)                  ; we want to use use-package, not the default emacs behavior / prevent double loading of libraries
