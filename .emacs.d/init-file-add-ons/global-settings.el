@@ -91,7 +91,7 @@
       idle-update-delay 1.0                      ; slow down the ui refresh rate a little bit
       enable-local-variables :all                ; fix 'defvar' warnings
       savehist-mode t			         ; track minibuffer history
-      x-select-enable-clipboard t                ; cutting and pasting uses the clipboard
+      ;;x-select-enable-clipboard t                ; cutting and pasting uses the clipboard
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING) ; treat clipboard input as UTF-8 string first, compound text next, etc.
       save-interprogram-paste-before-kill t      ; save existing clipboard text into kill ring before replacing it
       echo-keystrokes 0.1                        ; turn down time to echo keystrokes
