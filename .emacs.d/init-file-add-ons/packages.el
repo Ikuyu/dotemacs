@@ -1,4 +1,4 @@
-; ========
+;;; ========
 ;;; Packages
 ;;; ========
 
@@ -50,7 +50,6 @@
 ;;   {'nofrils-acme, 'nofrils-dark, 'nofrils-light, 'nofrils-sepia}.
 ;; autumn-light-theme:
 ;;   {'autumn-light}.
-;; spaceduck-emacs (copy the file 'spaceduck.el' from 'ctrl-dlahr/spaceduck-emacs' to '~.emacs.d' and use '(load-theme 'spaceduck t)'). Note: this theme doesn't work too well with package 'Powerline' and needs a lot of adjustments
 ;; solarized-theme:
 ;;   {'solarized-light,'solarized-dark}.
 ;; standard-themes:
@@ -131,16 +130,33 @@
 ;;   (load-theme 'solarized-dark t))
 
 (use-package gruvbox-theme
-  :init (load-theme 'gruvbox-dark-medium t)
+  :init (load-theme 'gruvbox-light-medium t)
   :custom-face
-  (avy-lead-face ((nil (:foreground "#fbf1c7"))))
-  (avy-lead-face-0 ((nil (:foreground "#fbf1c7"))))
-  (avy-lead-face-1 ((nil (:foreground "#fbf1c7"))))
-  (avy-lead-face-2 ((nil (:foreground "#fbf1c7"))))
-  (isearch ((nil (:foreground "#fbf1c7"))))
-  (lazy-highlight ((t (:foreground "#fbf1c7"))))
-  (isearch-fail ((nil (:foreground "#fbf1c7")))) ; gruvbox-dark0
-  (powerline-inactive2 ((nil (:background "#32302f"))))) ; gruvbox-light-medium: #f2e5bc gruvbox-dark-medium: #32302f (gruvbox-dark0_soft)
+  (avy-lead-face ((nil (:foreground "#ffdfaf"))))
+  (avy-lead-face-0 ((nil (:foreground "#ffdfaf"))))
+  (avy-lead-face-1 ((nil (:foreground "#ffdfaf"))))
+  (avy-lead-face-2 ((nil (:foreground "#ffdfaf"))))
+  (isearch ((nil (:foreground "#ffdfaf"))))
+  (isearch-fail ((nil (:foreground "#ffdfaf"))))
+  (powerline-inactive2 ((nil (:background "#f2e5bc"))))
+  :config
+  (set-face-foreground 'lazy-highlight (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
+                                           "#ffdfaf"
+                                         "#3a3a3a")))
+
+
+
+;; -----------------
+;; Toggle appearance
+;; -----------------
+(use-package heaven-and-hell
+  :after gruvbox-theme
+  :config
+  (setq heaven-and-hell-theme-type 'light                        ; default appearance
+        heaven-and-hell-themes '((light . gruvbox-light-medium)
+                                 (dark . gruvbox-dark-medium))
+        heaven-and-hell-load-theme-no-confirm t)
+  :hook (after-init . heaven-and-hell-init-hook))
 
 
 
@@ -150,8 +166,7 @@
 (use-package powerline
   :config
   (setq powerline-default-separator 'wave ; {'alternate,'arrow,'arrow-fade,'bar,'box,'brace,'butt,'chamfer,'contour,'curve,'rounded,'roundstub,'slant,'wave,'zigzag,nil}
-        powerline-display-buffer-size nil)
-  (powerline-default-theme))
+        powerline-display-buffer-size nil))
 
 
 
@@ -181,7 +196,7 @@
 
 
 ;; ----------------------------------
-;; Kep installed packages up-to-date
+;; Keep installed packages up-to-date
 ;; ----------------------------------
 (use-package auto-package-update        ; Emacs 29: use the command 'package-update-all'
   :defer t
@@ -426,13 +441,13 @@
 (use-package esxml)
 
 (use-package nov		    ; currently the only viable option
+  :after esxml
   :defer t
   :mode ("\\.epub\\'" . nov-mode)
   :preface
   (defun init-nov-delayed-render ()
     (run-with-idle-timer 0.2 nil 'nov-render-document))
   :custom (nov-text-width t)
-  :after esxml
   :hook
   (nov-mode-hook . olivetti-mode)
   (nov-mode-hook . init-nov-delayed-render)
@@ -462,7 +477,7 @@
 ;; -------------------------
 ;; (use-package ac-geiser
 ;;   :defer t
-;;   :config (eval-after-load "auto-complete"
+;;   :config (eval-after-load 'auto-complete
 ;; 	    '(add-to-list 'ac-modes 'geiser-repl-mode))
 ;;   :hook
 ;;   (geiser-mode  . ac-geiser-setup)
@@ -706,7 +721,7 @@
 ;; ---------------------------------------
 (use-package org-pandoc-import
   :defer t
-  :after org
+≈  :after org
   :quelpa (org-pandoc-import
            :fetcher github
            :repo "tecosaur/org-pandoc-import"
@@ -726,6 +741,7 @@
 ;; Ergonomic command mode
 ;; ----------------------
 (use-package meow
+  :after gruvbox-theme
   :if (not my/modus-tollens)
   :defer t
   :init
@@ -807,12 +823,11 @@
                                                 (powerline-raw
                                                  (char-to-string 57505)
                                                  face1 'l))
-                                              (powerline-raw "%4l" face1 'l)
-                                              (powerline-raw ":" face1 'l)
-                                              (powerline-raw "%4c" face1 'r)
+                                              (powerline-raw "%4l:" face1 'l)
+                                              (powerline-raw (format-mode-line '(4 "%c")) face1)
                                               (funcall separator-right face1 face0)
                                               (powerline-raw " " face0)
-                                              (powerline-raw "%6p" face0 'r)
+                                              (powerline-raw "%3p" face0 'r)
                                               (when powerline-display-hud
                                                 (powerline-hud face0 face2))
                                               (powerline-fill face0 0))))
@@ -826,11 +841,11 @@
   ;;(meow-goto-line-function 'consult-goto-line)
   :config
   (when (string-match-p "gruvbox.*" (symbol-name (car custom-enabled-themes)))
-    (set-face-attribute 'meow-normal-indicator nil :foreground "#fbf1c7" :background "#000087")
-    (set-face-attribute 'meow-motion-indicator nil :foreground "#fbf1c7" :background "#8f3f71")
-    (set-face-attribute 'meow-keypad-indicator nil :foreground "#fbf1c7" :background "#af3a03")
-    (set-face-attribute 'meow-insert-indicator nil :foreground "#fbf1c7" :background "#9d0006")
-    (set-face-attribute 'meow-beacon-indicator nil :foreground "#fbf1c7" :background "#005f5f"))
+    (set-face-attribute 'meow-normal-indicator nil :foreground "#ffdfaf" :background "#000087")  ; blue
+    (set-face-attribute 'meow-motion-indicator nil :foreground "#ffdfaf" :background "#8f3f71")  ; purple
+    (set-face-attribute 'meow-keypad-indicator nil :foreground "#ffdfaf" :background "#af3a03")  ; orange
+    (set-face-attribute 'meow-insert-indicator nil :foreground "#ffdfaf" :background "#9d0006")  ; red
+    (set-face-attribute 'meow-beacon-indicator nil :foreground "#ffdfaf" :background "#005f5f")) ; aqua
   (setq meow-expand-hint-remove-delay 2)
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
