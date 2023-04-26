@@ -60,12 +60,13 @@
 
 ;; Adjust globally applied local settings.
 (setq-default case-fold-search nil               ; enable case-sensitive search & replace
-	      visual-line-mode t                 ; a line is a line, not a sentence
 	      indent-tabs-mode nil   		 ; never mix tabs and spaces, never use tabs
-              cursor-type 'bar)
+              cursor-type 'bar
+              fill-column 79)                    ; used in auto-fill-mode, ignored in visual-line-mode
 
 ;; Adjust global settings (variables).
-(setq electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
+(setq
+      electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
       fast-but-imprecise-scrolling t             ; accelerate scrolling operations
       inhibit-compacting-font-caches t           ; don’t compact font caches during garbage collection
       save-interprogram-paste-before-kill t      ; ensure that Emacs kill operations do not irrevocably overwrite existing clipboard text
@@ -121,6 +122,7 @@
 (global-auto-revert-mode t)                      ; update buffers when underlying files are changed externally
 (save-place-mode)		                 ; when visiting a file, point goessavehist-mode to the last place where it was before
 (tooltip-mode -1)                                ; show tooltips in the minibuffer
+(global-visual-line-mode t)
 
 (defadvice load-theme (before clear-previous-themes activate)
   "Clear existing theme settings instead of layering them."
@@ -136,8 +138,7 @@
 
 ;; Hooks.
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespace on save
-
-
+;;(add-hook 'prog-mode-hook 'turn-on-auto-fill)
 
 ;; --------------------------------------
 ;; Adjust default copy/yank/kill behavior
@@ -176,3 +177,6 @@ function that sets `deactivate-mark' to t."
 (global-set-key (kbd "M-w") 'my/pasteboard-copy)
 (global-set-key (kbd "C-y") 'my/pasteboard-yank)
 (global-set-key (kbd "C-w") 'my/pasteboard-kill)
+
+;; Create allias for M-q (fill-paragraph)
+;;(global-set-key (kbd "s-SPC") (kbd "M-q")) ; ⌘⇧SPACE
