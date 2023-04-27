@@ -245,6 +245,19 @@
 
 
 
+;; --------------------------------------------------------------------------
+;; Disable the arrow, end, home and delete keys, as well as their control and
+;; meta prefixes
+;; --------------------------------------------------------------------------
+(use-package no-easy-keys		; force using the proper Emacs movement keys
+  :if my/modus-tollens
+  :quelpa (emacs-no-easy-keys
+	   :fetcher github
+	   :repo "danamlund/emacs-no-easy-keys")
+  :config (no-easy-keys t))
+
+
+
 ;; -----------------
 ;; Disable the mouse
 ;; -----------------
