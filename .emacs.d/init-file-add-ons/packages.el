@@ -59,7 +59,10 @@
   ;;:custom (quelpa-upgrade-p t "Always try to update packages") ; see: 'auto-package-update'
   )
 
-(use-package quelpa-use-package)      ; example: (package-vc-install '(combobulate :url "https://github.com/mickeynp/combobulate"))
+(use-package quelpa-use-package       ; example: (package-vc-install '(combobulate :url "https://github.com/mickeynp/combobulate"))
+  :init
+  (setq quelpa-self-upgrade-p nil
+        quelpa-update-melpa-p nil))
 
 
 
@@ -537,6 +540,7 @@
   :defer t
   :init
   (setq sly-net-coding-system 'utf-8-unix
+        ;sly-mrepl-pop-sylvester nil
         sly-contribs '(sly-fancy sly-repl-ansi-color sly-autodoc)
 	inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort"))
 
@@ -758,7 +762,7 @@
 ;; ---------------------------------------
 (use-package org-pandoc-import
   :defer t
-≈  :after org
+  :after org
   :quelpa (org-pandoc-import
            :fetcher github
            :repo "tecosaur/org-pandoc-import"
@@ -766,9 +770,10 @@
 
 
 
-;; -----------------------------------------------------
-;; Perform document conversions using the pandoc library
-;; -----------------------------------------------------
+;; ---------------------------------------------------------------------
+;; Perform document conversions using the pandoc library (requires 'brew
+;; install pandoc')
+;; ---------------------------------------------------------------------
 (use-package pandoc-mode
   :after org)
 
