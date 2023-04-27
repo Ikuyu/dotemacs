@@ -44,6 +44,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(require 'use-package)
+
 (setq use-package-always-ensure t        ; specify ':ensure nil' for internal packages/libraries
       load-prefer-newer t
       use-package-expand-minimally t     ; make the byte-compiled file as minimal as possible
