@@ -109,7 +109,7 @@
       truncate-string-ellipsis "…"               ; use the unicode ellipsis for truncations
       ;; Info about auto completion in Emacs 29:
       ;; https://robbmann.io/posts/emacs-29-completions.
-a      ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
+      ;; completion-auto-help t                     ; added in Emacs 29 {nil, t, 'always, 'visible}
       ;; completion-auto-select 'second-tab         ; added in Emacs 29 {nil, t, 'second-tab}
       ;; (define-key minibuffer-local-map (kbd "C-p") #'minibuffer-previous-completion)          ; up when completing in the minibuffer
       ;; (define-key minibuffer-local-map (kbd "C-n") #'minibuffer-next-completion)              ; down when completing in the minibuffer`'
@@ -145,7 +145,7 @@ a      ;; completion-auto-help t                     ; added in Emacs 29 {nil, t
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
 ;; Faces.
-(set-face-foreground 'fill-column-indicator "#9d0006")
+;;(set-face-foreground 'fill-column-indicator "#9d0006")
 
 ;; --------------------------------------
 ;; Adjust default copy/yank/kill behavior
@@ -185,3 +185,27 @@ function that sets `deactivate-mark' to t."
 (global-set-key (kbd "M-w") 'my/pasteboard-copy)
 (global-set-key (kbd "C-y") 'my/pasteboard-yank)
 (global-set-key (kbd "C-w") 'my/pasteboard-kill)
+
+(when my/modus-tollens
+  (global-unset-key (kbd "<left>"))
+  (global-unset-key (kbd "<right>"))
+  (global-unset-key (kbd "<up>"))
+  (global-unset-key (kbd "<down>"))
+  (global-unset-key (kbd "<C-left>"))
+  (global-unset-key (kbd "<C-right>"))
+  (global-unset-key (kbd "<C-up>"))
+  (global-unset-key (kbd "<C-down>"))
+  (global-unset-key (kbd "<M-left>"))
+  (global-unset-key (kbd "<M-right>"))
+  (global-unset-key (kbd "<M-up>"))
+  (global-unset-key (kbd "<M-down>"))
+  (global-unset-key (kbd "<delete>"))
+  (global-unset-key (kbd "<C-delete>"))
+  (global-unset-key (kbd "<M-delete>"))
+  (global-unset-key (kbd "<next>"))
+  (global-unset-key (kbd "<prior>"))
+  (global-unset-key (kbd "<C-prior>"))
+  (global-unset-key (kbd "<home>"))
+  (global-unset-key (kbd "<C-home>"))
+  (global-unset-key (kbd "<end>"))
+  (global-unset-key (kbd "C-<end>")))
