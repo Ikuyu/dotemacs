@@ -47,8 +47,8 @@
   (package-install 'use-package))
 
 (eval-and-compile ; when using Emacs 29 these settings can be moved to to global-setting.el
-  (setq use-package-always-ensure t        ; specify ':ensure nil' for internal packages/libraries
-        load-prefer-newer t
+  (setq use-package-always-ensure t        ; saves the trouble of having to specify :ensure t everywhere
+        load-prefer-newer t                ; always load newest byte code
         ;;warning-minimum-level :emergency
         use-package-expand-minimally t))   ; make the byte-compiled file as minimal as possible
 
@@ -58,7 +58,6 @@
 ;; Use Quelpa to install packages from source
 ;; ------------------------------------------
 (use-package quelpa		      ; obsolete in: emacs 29. Use package-vc-install instead
-  :defer t
   ;;:custom (quelpa-upgrade-p t "Always try to update packages") ; see: 'auto-package-update'
   )
 
@@ -139,11 +138,11 @@
 ;;   :init
 ;;   (setq standard-themes-bold-constructs nil
 ;;         standard-themes-italic-constructs nil
-;;         standard-themes-fringes 'subtle                  ; {nil,'subtle,'intense}
+;;         standard-themes-fringes 'subtle        ; {nil,'subtle,'intense}
 ;;         ;;standard-themes-links '(neutral-underline faint) ; {nil,neutral-underline,no-underline,faint,bold,italic}
 ;;         ;;standard-themes-prompts '(bold italic)           ; {nil,background,bold,italic}
 ;;         )
-;;   (mapc #'disable-theme custom-enabled-themes)           ; disable all other themes to avoid awkward blending
+;;   (mapc #'disable-theme custom-enabled-themes) ; disable all other themes to avoid awkward blending
 ;;   (load-theme 'standard-dark t))
 
 ;; (use-package solarized-emacs
@@ -168,17 +167,17 @@
 (use-package gruvbox-theme
   :init (load-theme 'gruvbox-light-medium t)
   :custom-face
-  (avy-lead-face ((nil (:foreground "#ffdfaf"))))
-  (avy-lead-face-0 ((nil (:foreground "#ffdfaf"))))
-  (avy-lead-face-1 ((nil (:foreground "#ffdfaf"))))
-  (avy-lead-face-2 ((nil (:foreground "#ffdfaf"))))
-  (isearch ((nil (:foreground "#ffdfaf"))))
-  (isearch-fail ((nil (:foreground "#ffdfaf"))))
+  (avy-lead-face ((nil (:foreground "#ebdbb2"))))
+  (avy-lead-face-0 ((nil (:foreground "#ebdbb2"))))
+  (avy-lead-face-1 ((nil (:foreground "#ebdbb2"))))
+  (avy-lead-face-2 ((nil (:foreground "#ebdbb2"))))
+  (isearch ((nil (:foreground "#ebdbb2"))))
+  (isearch-fail ((nil (:foreground "#ebdbb2"))))
   (powerline-inactive2 ((nil (:background "#f2e5bc"))))
   :config
   ;;(set-face-foreground 'fill-column-indicator "#9d0006")
   (set-face-foreground 'lazy-highlight (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
-                                           "#ffdfaf"
+                                           "#ebdbb2"
                                          "#3a3a3a")))
 
 
@@ -189,7 +188,7 @@
 (use-package heaven-and-hell
   :after gruvbox-theme
   :config
-  (setq heaven-and-hell-theme-type 'light                        ; default appearance
+  (setq heaven-and-hell-theme-type 'light         ; default appearance
         heaven-and-hell-themes '((light . gruvbox-light-medium)
                                  (dark . gruvbox-dark-medium))
         heaven-and-hell-load-theme-no-confirm t)
@@ -237,11 +236,10 @@
 ;; ----------------------------------
 ;; Keep installed packages up-to-date
 ;; ----------------------------------
-(use-package auto-package-update        ; Emacs 29: use the command 'package-update-all'
-  :defer t
+(use-package auto-package-update               ; Emacs 29: use the command 'package-update-all'
   :custom
   (auto-package-update-prompt-before-update t)
-  (auto-package-update-delete-old-versions t)  ; delete residual old versions
+  (auto-package-update-delete-old-versions t)  ; delete residual older versions
   (auto-package-update-hide-results t))        ; do not bother me when updates have taken place
 
 
@@ -250,18 +248,18 @@
 ;; Disable the arrow, end, home and delete keys, as well as their control and
 ;; meta prefixes
 ;; --------------------------------------------------------------------------
-(use-package guru-mode	                ; force using the proper Emacs movement keys
+(use-package guru-mode	                       ; force using the proper Emacs movement keys
   :if my/modus-tollens
   :config
-  ;;(setq guru-warn-only t)               ; warnings only when using the arrow keys
-  (guru-global-mode +1))
+  ;;(setq guru-warn-only t)                    ; warnings only when using the arrow keys
+  (guru-global-mode t))
 
 
 
 ;; -----------------
 ;; Disable the mouse
 ;; -----------------
-(use-package disable-mouse      	; force using the proper Emacs movement keys
+(use-package disable-mouse      	       ; force using the proper Emacs movement keys
   :if my/modus-tollens
   :quelpa (disable-mouse
 	   :fetcher github
@@ -274,9 +272,8 @@
 ;; Center document and increase margins
 ;; ------------------------------------
 (use-package olivetti
-  :defer t
   :custom
-  (olivetti-body-width 70) ; ideal for reading text
+  (olivetti-body-width 70)                     ; ideal for reading text
   :config
   (setq ;;olivetti-body-width 0.65
         ;;olivetti-recall-visual-line-mode-entry-state t
@@ -287,8 +284,7 @@
 ;; ---------------------------
 ;; Try new packages in advance
 ;; ---------------------------
-(use-package try
-  :defer t)
+(use-package try)
 
 
 
@@ -305,7 +301,6 @@
 ;; PROG DONT TEMP KLUDGE THEM HACK XXXX
 ;; ------------------------------------------------------------------------
 (use-package hl-todo
-  :defer t
   :init (global-hl-todo-mode t))
 
 
@@ -313,8 +308,7 @@
 ;; --------------------------------
 ;; Read NOS Teletext pages in Emacs
 ;; --------------------------------
-(use-package teletext-nos               ; start NOS Teletekst automatically with 's-u t' (see user-keymap.el)
-  :defer t
+(use-package teletext-nos                      ; start NOS Teletekst automatically with 's-u t' (see user-keymap.el)
   :quelpa (teletext-nos
            :fetcher github
            :repo "Ikuyu/emacs-teletext-nos")
@@ -326,9 +320,8 @@
 ;; Fast jumping in visible text
 ;; ----------------------------
 (use-package avy ; an alternative is included in package 'meow' (see below)
-  :defer t
   :config (avy-setup-default)
-  :bind (("s-j" . avy-goto-char-timer))) ; jump back in sequence with C-x C-SPC
+  :bind (("s-j" . avy-goto-char-timer)))       ; jump back in sequence with C-x C-SPC
 
 
 
@@ -336,7 +329,6 @@
 ;; Fast jumping between buffers
 ;; ----------------------------
 (use-package frog-jump-buffer
-  :defer t
   :config
   (dolist (regexp '("TAGS" "^\\*Compile-log" "-debug\\*$" "^\\:" "errors\\*$" "^\\*Backtrace" "-ls\\*$"
                     "stderr\\*$" "^\\*Flymake" "^\\*vc" "^\\*Warnings" "checkout\\*$" "\\^*Shell Command"))
@@ -351,8 +343,8 @@
 ;; ------------------------------------------
 ;; Increase selected region by semantic units
 ;; ------------------------------------------
-(use-package expand-region          ; package 'meow' (see below) als it's own way of expanding a region
-  :bind ("C-=" . er/expand-region)) ; press C-= once to enable this mode
+(use-package expand-region                     ; package 'meow' (see below) als it's own way of expanding a region
+  :bind ("C-=" . er/expand-region))            ; press C-= once to enable this mode
 
 
 
@@ -378,21 +370,21 @@
 ;; Extend build-in directory editor support
 ;; ----------------------------------------
 (use-package dired
-  :defer t
+  :ensure nil
   :custom
   (dired-listing-switches "-lha --group-directories-first") ; human-readable listing
-  (dired-recursive-copies 'always)              ; "always" means no asking
-  (dired-recursive-deletes 'top)                ; "top" means ask once for top level directory
+  (dired-recursive-copies 'always)             ; "always" means no asking
+  (dired-recursive-deletes 'top)               ; "top" means ask once for top level directory
   :config
   (when (my/macos-p)
     (setq dired-use-ls-dired t
-          insert-directory-program "gls"        ; make sure 'gls' is installed with 'brew install coreutils'
+          insert-directory-program "gls"       ; make sure 'gls' is installed with 'brew install coreutils'
           trash-directory "~/.Trash"))
-  (setq dired-dwim-target t                     ; if another Dired buffer is visible in another window, use that directory as target for rename/copy
+  (setq dired-dwim-target t                    ; if another Dired buffer is visible in another window, use that directory as target for rename/copy
         dired-kill-when-opening-new-dired-buffer t ; use 'a' to replace the current Dired buffer with the file/directory the cursor is on
-        ;; dired-make-directory-clickable t        ; Emacs 29.1
-        ;; dired-mouse-drag-files t                ; Emacs 29.1
-        delete-by-moving-to-trash t)            ; move deleted files to trash
+        ;; dired-make-directory-clickable t       ; Emacs 29.1
+        ;; dired-mouse-drag-files t               ; Emacs 29.1
+        delete-by-moving-to-trash t)           ; move deleted files to trash
   :hook
   (dired-mode . dired-hide-details-mode)
   (dired-mode-hook . auto-revert-mode)) ; automatically refresh dired buffer on changes
@@ -406,7 +398,6 @@
   :quelpa (dired+
            :fetcher github
            :repo "emacsmirror/dired-plus")
-  :defer t
   :custom (diredp-make-find-file-keys-reuse-dirs)
   :bind
   (:map dired-mode-map
@@ -420,7 +411,7 @@
 ;; -------------------------------------------
 ;; Disallow *scratch* buffer from being killed
 ;; -------------------------------------------
-(use-package unkillable-scratch     ; Emacs 29: use the command 'scratch-buffer' to switch to this buffer or create a new one if it has been deleted
+(use-package unkillable-scratch     ; Emacs 29: use the command 'scratch-buffer' to switch to this buffer or to create one if it has been deleted
   :config (unkillable-scratch t))
 
 
@@ -447,7 +438,6 @@
 ;; Markdown support (requires 'brew install pandoc')
 ;; -------------------------------------------------
 (use-package markdown-mode
-  :defer t
   :init (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   :config (setq markdown-fontify-code-blocks-natively t)
   :mode
@@ -457,7 +447,6 @@
   :hook ((markdown-mode-hook)))
 
 (use-package markdown-preview-mode
-  :defer t
   :after markdown-mode
   :init (setq markdown-preview-stylesheets nil)
   :bind (:map markdown-mode-map ("C-c C-c p" . markdown-preview-mode)))
@@ -468,7 +457,6 @@
 ;; PDF support
 ;; -----------
 (use-package pdf-tools
-  :defer t
   :config
   (pdf-tools-install :no-query)
   (custom-set-variables
@@ -483,7 +471,6 @@
 
 (use-package nov		    ; currently the only viable option
   :after esxml
-  :defer t
   :mode ("\\.epub\\'" . nov-mode)
   :preface
   (defun init-nov-delayed-render ()
@@ -500,7 +487,6 @@
 ;; Support for Scheme
 ;; ------------------
 ;; (use-package geiser
-;;   :defer t
 ;;   :init
 ;;   (setenv "LANG" "en_US.UTF-8")     ; fix 'warning failed to install locale' (en_NL is not a locale)
 ;;   (setq geiser-default-implementation 'guile
@@ -517,8 +503,7 @@
 ;; Autocompletion for Geiser
 ;; -------------------------
 ;; (use-package ac-geiser
-;;   :defer t
-;;   :config (eval-after-load "auto-complete"
+;;   :config (eval-after-load 'auto-complete
 ;; 	    '(add-to-list 'ac-modes 'geiser-repl-mode))
 ;;   :hook
 ;;   (geiser-mode  . ac-geiser-setup)
@@ -530,7 +515,6 @@
 ;; Support for Racket
 ;; ------------------
 ;; (use-package racket-mode
-;;   :defer t
 ;;   :hook (racket-mode . racket-xp-mode))
 
 
@@ -539,8 +523,7 @@
 ;; Support for Common Lisp
 ;; -----------------------
 (use-package sly
-  :defer t
-  :init
+  :config
   (setq sly-net-coding-system 'utf-8-unix
         ;sly-mrepl-pop-sylvester nil
         sly-contribs '(sly-fancy sly-repl-ansi-color sly-autodoc)
@@ -552,18 +535,17 @@
 ;; Autocompletion for Sly
 ;; ----------------------
 (use-package ac-sly
-  :defer t
-  :config (eval-after-load "auto-complete" ; or: init?
+  :config (eval-after-load 'auto-complete
 	    '(add-to-list 'ac-modes 'sly-mrepl-mode))
   :hook (sly-mode . set-up-sly-ac))
 
 
 
 ;; -----------------------------
-;; Extend build-in ELisp support
+;; Extend build-in eLisp support
 ;; -----------------------------
 (use-package emacs-lisp-mode
-  :defer t
+  :ensure nil
   :bind (:map emacs-lisp-mode-map
               ("C-c C-b" . eval-buffer)
               ("C-c C-c" . emacs-lisp-byte-compile)
@@ -575,7 +557,7 @@
 
 
 ;; ----------------------------------
-;; behavior-driven Emacs lisp testing
+;; Behavior-driven Emacs lisp testing
 ;; ----------------------------------
 (use-package buttercup)
 
@@ -592,7 +574,7 @@
 ;; Extend build-in IELM support
 ;; ----------------------------
 (use-package ielm
-  :defer t
+  :ensure nil
   :config
   (defun ielm-read-history ()
     "Restore `ielm' history."
@@ -619,7 +601,7 @@
 ;; Extend build-in C support
 ;; -------------------------
 (use-package c-mode
-  :defer t
+  :ensure nil
   :config
   (setq c-block-comment-prefix "* "
         c-default-style "gnu"
@@ -636,26 +618,25 @@
 ;; Edit multiple occurrences simultaneously
 ;; ----------------------------------------
 ;; https://www.youtube.com/watch?v=3O-bDYqhFos
-;; (use-package multiple-cursors       ; alternatives: 'iedit', 'macrursors' or 'meow' (see below)
-;;   :if (not my/modus-tollens)
-;;   :init (setq mc/always-run-for-all t)
-;;   :bind ("S-s-<mouse-1>" . mc/add-cursor-on-click))
+(use-package multiple-cursors       ; alternatives: 'iedit', 'macrursors' or 'meow' (see below)
+  :disabled
+  :if (not my/modus-tollens)
+  :init (setq mc/always-run-for-all t)
+  :bind ("S-s-<mouse-1>" . mc/add-cursor-on-click))
 
 
 
 ;; -----------
 ;; Git support
 ;; -----------
-(use-package magit
-  :defer t)
+(use-package magit)
 
 
 
 ;; ---------------------------
 ;; Keep git repositories clean
 ;; ---------------------------
-(use-package gitignore-templates
-  :defer t)
+(use-package gitignore-templates)
 
 
 
@@ -708,11 +689,11 @@
 
 
 
-;; ----------------
-;; SPS for org-mode
-;; ----------------
-(use-package org-drill			; alternatives: {'Pamparam,'Org-fc,'Anki-editor,'Anki.el,'Ankifier.el}
-  :defer t)
+;; -------------------------------------
+;; Spaced repetition system for org-mode
+;; -------------------------------------
+(use-package org-drill)                 ; alternatives: {'Pamparam,'Org-fc,'Anki-editor,'Anki.el,'Ankifier.el}
+
 
 
 
@@ -764,7 +745,6 @@
 ;; Use pandoc to convert files to org-mode
 ;; ---------------------------------------
 (use-package org-pandoc-import
-  :defer t
   :after org
   :quelpa (org-pandoc-import
            :fetcher github
@@ -788,7 +768,6 @@
 (use-package meow
   :after gruvbox-theme
   :if (not my/modus-tollens)
-  :defer t
   :init
   (require 'meow)
   (setq meow-replace-state-name-list '((normal . "CMD")   ; command state
