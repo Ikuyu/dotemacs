@@ -110,7 +110,7 @@
                                    (message "Error enabling Teletext:\n(Searching for program No such file or directory teletext)"))
                                  (if (package-installed-p 'teletext-nos)
                                      (progn
-                                       (face-remap-add-relative 'default :foreground "#ffffff" :background "#000000")
+                                       (face-remap-add-relative 'default :foreground "#ebdbb2" :background "#262626")
                                        (teletext-select-network "NOS"))
                                    (message "Error enabling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)"))))
 (define-key user-map (kbd "T") (lambda ()
