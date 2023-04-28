@@ -65,7 +65,7 @@
 (use-package quelpa-use-package       ; example: (package-vc-install '(combobulate :url "https://github.com/mickeynp/combobulate"))
   :init
   (setq quelpa-self-upgrade-p nil
-        quelpa-update-melpa-p nil))
+        quelpa-update-melpa-p nil))   ; 'auto-package-update' is used for updating (see elsewhere in this file)
 
 
 
@@ -248,14 +248,13 @@
 
 ;; --------------------------------------------------------------------------
 ;; Disable the arrow, end, home and delete keys, as well as their control and
-;; meta prefixes (won't install (see: global-settings.el))
+;; meta prefixes
 ;; --------------------------------------------------------------------------
-;; (use-package no-easy-keys		; force using the proper Emacs movement keys
-;;   :if my/modus-tollens
-;;   :quelpa (emacs-no-easy-keys
-;; 	   :fetcher github
-;; 	   :repo "danamlund/emacs-no-easy-keys")
-;;   :config (no-easy-keys t))
+(use-package guru-mode	                ; force using the proper Emacs movement keys
+  :if my/modus-tollens
+  :config
+  ;;(setq guru-warn-only t)               ; warnings only when using the arrow keys
+  (guru-global-mode +1))
 
 
 
