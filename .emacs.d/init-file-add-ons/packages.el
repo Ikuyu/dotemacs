@@ -46,11 +46,11 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(eval-and-compile ; when using Emacs 29 these settings can be moved to to global-setting.el
+(eval-and-compile                          ; when using Emacs 29 these settings can be moved to to global-setting.el
   (setq use-package-always-ensure t        ; saves the trouble of having to specify :ensure t everywhere
         load-prefer-newer t                ; always load newest byte code
         ;;warning-minimum-level :emergency
-        use-package-expand-minimally t))   ; make the byte-compiled file as minimal as possible
+        use-package-expand-minimally t))     ; make the byte-compiled file as minimal as possible
 
 
 
@@ -515,19 +515,50 @@
 ;; Support for Racket
 ;; ------------------
 ;; (use-package racket-mode
-;;   :hook (racket-mode . racket-xp-mode))
+;;   :hook ((racket-mode . racket-xp-mode)
+;;          (racket-mode . racket-unicode-input-method-enable)
+;;          (racket-repl-mode . racket-unicode-input-method-enable))
 
 
 
-;; -----------------------
-;; Support for Common Lisp
-;; -----------------------
+;; ---------------------------------------------------------------
+;; Support for Common Lisp (requires 'touch ~/.sly-mrepl-history')
+;; ---------------------------------------------------------------
 (use-package sly
   :config
   (setq sly-net-coding-system 'utf-8-unix
-        ;sly-mrepl-pop-sylvester nil
-        sly-contribs '(sly-fancy sly-repl-ansi-color sly-autodoc)
-	inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort"))
+        ;;sly-complete-symbol-function 'sly-simple-completions    ; or: 'sly-flex-completions
+        ;;sly-symbol-completion-mode nil
+        ;;sly-kill-without-query-p t
+        ;;sly-mrepl-pop-sylvester nil
+        sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
+        sly-contribs '(sly-fancy)
+        inferior-lisp-program "sbcl --noinform --disable-debugger"
+        sly-common-lisp-style-default 'sbcl
+        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort")) ; not working: sly keeps connecting ad infinitum
+))
+        ;; sly-lisp-implementations '(;(sbcl ("sbcl" "--noinform" "--disable-debugger"))
+        ;;                            (clisp ("clisp" "-q" "-ansi" "-modern" "-I" "-on-error" "abort"))
+                                        ;(clozure-cl ("/Applications/CCL.app/Contents/Resources/darwinx86/dx86cl64")))))
+
+
+
+;; ----------------------------------------
+;; Add ANSI colors support to the sly mrepl
+;; ----------------------------------------
+;; (use-package sly-repl-ansi-color
+;;   :after sly
+;;   :init (add-to-list 'sly-contribs 'sly-repl-ansi-color nil #'eq))
+
+
+
+;; ---------------------
+;; fancy macro-expansion
+;; ---------------------
+;; (use-package sly-macrostep
+;;   :after sly
+;;   :config (with-eval-after-load 'sly
+;;             (sly-enable-contrib 'sly-macrostep)))
 
 
 
