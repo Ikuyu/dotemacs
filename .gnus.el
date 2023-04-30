@@ -12,24 +12,23 @@
 ;;
 ;; Copyright (C) 2023 Edwin H. Jonkvorst.
 ;;
-;; Permission is hereby granted, free of charge, to any person obtaining
-;; a copy of this software and associated documentation files (the
-;; "Software"), to deal in the Software without restriction, including
-;; without limitation the rights to use, copy, modify, merge, publish,
-;; distribute, sublicense, and/or sell copies of the Software, and to
-;; permit persons to whom the Software is furnished to do so, subject to
-;; the following conditions:
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to
+;; deal in the Software without restriction, including without limitation the
+;; rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+;; sell copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
 ;;
-;; The above copyright notice and this permission notice shall be
-;; included in all copies or substantial portions of the Software.
+;; The above copyright notice and this permission notice shall be included in
+;; all copies or substantial portions of the Software.
 ;;
-;; The Software Is Provided "As Is", Without Warranty Of ANY KIND,
-;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANYr
-;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;; The Software Is Provided "As Is", Without Warranty Of ANY KIND, EXPRESS OR
+;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+;; IN THE SOFTWARE.
 
 ;;    __ _ _ __  _   _ ___
 ;;   / _` | '_ \| | | / __|
@@ -37,17 +36,23 @@
 ;; (_)__, |_| |_|\__,_|___/
 ;;   |___/
 
-;; Gnus supports newsgroups (NNTP), email accounts (IMAP/POP) and sending mails (IMAP). Each is called a server.
-;; A server can have many groups. For email servers, groups are just mail folders.
-;; By default, all folders are invisible. Unless a group contains `favorites' (ticked items' you need to subscribe to it to make it visible.
-;; Gmail for example, counts by mail thread. Gnus counts by individual mail.
+;; Gnus supports newsgroups (NNTP), email accounts (IMAP/POP) and sending mails
+;; (IMAP). Each is called a server. A server can have many groups. For email
+;; servers, groups are just mail folders. By default, all folders are
+;; invisible. Unless a group contains `favorites' (ticked items' you need to
+;; subscribe to it to make it visible. Gmail for example, counts by mail
+;; thread. Gnus counts by individual mail.
 
-;; Passwords are stored in '~/.authinfo'. Make sure no one else can read your them:
+;; Passwords are stored in '~/.authinfo'. Make sure no one else can read your
+;; them:
 ;; $ chmod 600 ~/.authinfo
 
-;; Close Gnus with 'q' instead of 'C-x k'. This prevents Gnus from displaying the message 'Gnus auto-save file exists. Do you want to read it? (y or n) when it start up.
-;; Use 'L' to list all groups.
-;; Use 'u' to subsribe to one or more groups/inboxes/accounts.
+;; Important:
+;; - Close Gnus with 'q' instead of 'C-x k'. This prevents Gnus from displaying
+;;   the message 'Gnus auto-save file exists. Do you want to read it? (y or n)
+;;   when it start up.
+;; - Use 'L' to list all groups.
+;; - Use 'u' to subsribe to one or more groups/inboxes/accounts.
 
 
 
@@ -92,12 +97,12 @@
         gnus-expert-user t                   ; never ask for confirmation about anything
         gnus-large-newsgroup nil             ; groups of 200+ articles are not considered big
         gnus-always-read-dribble-file t      ; unconditionally read the dribble file
-        gnus-treat-display-smileys nil  ; do not display smileys as pictures
+        gnus-treat-display-smileys nil       ; do not display smileys as pictures
         gnus-treat-fill-article 0
         gnus-treat-buttonize t               ; add buttons
         gnus-treat-buttonize-head 'head
         gnus-inhibit-images nil
-        mm-text-html-renderer 'gnus-w3m      ; or 'shr, eww's text renderer
+        mm-text-html-renderer 'gnus-w3m      ; or use: 'shr (eww's text renderer)
         mm-inline-text-html-with-images t    ; allow retrieving images in html contents with the <img> tags
         mm-attachment-override-types '("image/.*") ; inline images?
         mm-file-name-rewrite-functions '(mm-file-name-delete-control       ; rewrite file names of MIME parts (delete control characters, delete shell gotchas, handle evil white spaces)
@@ -151,9 +156,9 @@
 
 
 
-;; ---------------------------
-;; Setup built-in html support
-;; ---------------------------
+;; -------------------------------------------------------
+;; Setup built-in html support (see: mm-text-html-renderer
+;; -------------------------------------------------------
 (use-package shr
   :defer t
   :init
