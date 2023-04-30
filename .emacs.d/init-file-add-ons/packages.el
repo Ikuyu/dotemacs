@@ -543,7 +543,6 @@
         sly-mrepl-pop-sylvester nil
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
-        (add-to-list 'slime-contribs 'slime-cl-indent)            ; ensure correct indentation e.g. of loop form
         inferior-lisp-program "sbcl --noinform"
         ;;sly-common-lisp-style-default 'sbcl
         ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working: sly keeps connecting ad infinitum
