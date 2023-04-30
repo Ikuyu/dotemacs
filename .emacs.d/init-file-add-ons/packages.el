@@ -31,9 +31,9 @@
 
 
 
-;; ---------------------
-;; Bootstrap use-package
-;; ---------------------
+;; -----------------------------
+;; Package system initialization
+;; -----------------------------
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/") ; add package repositories
@@ -42,15 +42,22 @@
 
 (package-initialize)
 
-(unless (package-installed-p 'use-package) ; obsolete in Emacs 29
-  (package-refresh-contents)
-  (package-install 'use-package))
+(unless package-archive-contents
+  (package-refresh-contents))
 
-(eval-and-compile                          ; when using Emacs 29 these settings can be moved to to global-setting.el
-  (setq use-package-always-ensure t        ; saves the trouble of having to specify :ensure t everywhere
-        load-prefer-newer t                ; always load newest byte code
-        ;;warning-minimum-level :emergency
-        use-package-expand-minimally t))     ; make the byte-compiled file as minimal as possible
+
+
+;; -------------------------------------
+;; Install package manager 'use-package'
+;; -------------------------------------
+(unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+(require 'use-package)
+
+(setq use-package-always-ensure t        ; saves the trouble of having to specify :ensure t everywhere
+      load-prefer-newer t                ; always load newest byte code
+      ;;warning-minimum-level :emergency
+      use-package-expand-minimally t)    ; make the byte-compiled file as minimal as possible
 
 
 
@@ -534,8 +541,8 @@
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
         inferior-lisp-program "sbcl --noinform --disable-debugger"
-        sly-common-lisp-style-default 'sbcl
-        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort")) ; not working: sly keeps connecting ad infinitum
+        ;;sly-common-lisp-style-default 'sbcl
+        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working: sly keeps connecting ad infinitum
 ))
         ;; sly-lisp-implementations '(;(sbcl ("sbcl" "--noinform" "--disable-debugger"))
         ;;                            (clisp ("clisp" "-q" "-ansi" "-modern" "-I" "-on-error" "abort"))
@@ -772,6 +779,18 @@
 
 
 
+;; ------------------------------------------
+;; send html email using org-mode html export
+;; ------------------------------------------
+(use-package org-mime
+  :config (setq org-mime-export-options '(:preserve-breaks t))
+          (add-hook 'message-mode-hook
+          (lambda ()
+            (local-set-key "\C-c\M-o" 'org-mime-htmlize))))
+(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart)
+
+
+
 ;; ---------------------------------------
 ;; Use pandoc to convert files to org-mode
 ;; ---------------------------------------
@@ -989,3 +1008,13 @@
      '("<escape>" . ignore)))
   (meow-setup)
   (meow-setup-indicator))
+
+
+
+;; --------------------
+;; Let it snow in Emacs
+;; --------------------
+(use-package snow
+  :custom
+  (snow-show-background t)
+  (snow-debug nil))
