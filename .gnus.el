@@ -60,7 +60,6 @@
 ;; Setup build-in email support (requires 'brew install w3m')
 ;; ----------------------------------------------------------
 (use-package gnus
-  :defer t
   :init (gnus-delay-initialize)
   :config
   (setq gnus-save-newsrc-file nil            ; don't save '.newsrc' (for using other newsreaders) on exit
@@ -179,7 +178,6 @@
 ;; Change accounts on the fly while composing messages
 ;; ---------------------------------------------------
 (use-package gnus-alias
-  :defert t
   :init
   (autoload 'gnus-alias-determine-identity "gnus-alias" nil t)
   (gnus-alias-init)                                                   ; call to message mode hook
