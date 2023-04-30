@@ -39,10 +39,10 @@
                                      (progn
                                        (heaven-and-hell-toggle-theme)
                                        (powerline-reset)
-                                       (set-face-attribute 'powerline-inactive2 nil :background (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
-                                                                                                    "#32302f"
-                                                                                                  "#f2e5bc"))
-
+                                       (set-face-background 'powerline-inactive2 (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
+                                                                                     "#32302f"
+                                                                                   "#f2e5bc"))
+                                       ;;(set-face-foreground 'lazy-highlight "#949494")
                                        )
                                    (message "Error enabling Heaven and Hell:\n(Searching for program No such file or directory heaven-and-hell)"))))
 (define-key user-map (kbd "d") 'dired)
@@ -51,7 +51,8 @@
 				 "Start ERC using TLS with preset information."
 				 (erc-tls :server "irc.libera.chat"
 					  :port "6697"
-					  :nick "ehjc")))
+                                          :nick erc-nick
+                                          :password erc-password)))
 (define-key user-map (kbd "f") 'find-name-dired)
 (define-key user-map (kbd "g") (lambda ()
 				 (interactive)
