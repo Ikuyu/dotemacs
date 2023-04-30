@@ -103,7 +103,7 @@
                                  (if (package-installed-p 'sly)
                                      (sly)
                                    (message "Error enabling Sly:\n(Searching for program No such file or directory sly)"))))
-(define-key user-map (kbd "s") (lambda ()
+(define-key user-map (kbd "S") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'snow)
                                      (snow)
