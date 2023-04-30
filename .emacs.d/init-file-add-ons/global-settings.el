@@ -94,7 +94,7 @@
       idle-update-delay 1.0                      ; slow down the ui refresh rate a little bit
       enable-local-variables :all                ; fix 'defvar' warnings
       savehist-mode t			         ; track minibuffer history
-      ;;x-select-enable-clipboard t                ; cutting and pasting uses the clipboard
+      text-scale-mode-step 1.1                      ;
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING) ; treat clipboard input as UTF-8 string first, compound text next, etc.
       save-interprogram-paste-before-kill t      ; save existing clipboard text into kill ring before replacing it
       echo-keystrokes 0.1                        ; turn down time to echo keystrokes
@@ -185,3 +185,35 @@ function that sets `deactivate-mark' to t."
 (global-set-key (kbd "M-w") 'my/pasteboard-copy)
 (global-set-key (kbd "C-y") 'my/pasteboard-yank)
 (global-set-key (kbd "C-w") 'my/pasteboard-kill)
+
+;; ------------------------------------------
+;; Retrieve passwords from the macOS keychain
+;; ------------------------------------------
+(defun my/keychain-get-internet-password (account-name)
+  "Get an internet password from the macOS keychain.
+The password is associated with the string ACCOUNT-NAME.
+This corresponds to the Account field in the Keychain Access GUI.
+If there is no matching password, or the output of 'security'
+is on an unexpected format, the function returns NIL."
+  (with-temp-buffer
+    (call-process "security"
+                  nil (list (current-buffer) t) nil
+                  "find-internet-password" "-a" account-name "-w")
+    (if (search-backward "not be found" nil t)
+        nil
+      (buffer-substring-no-properties 1 (- (point-max) 1)))))
+
+(defun my/keychain-get-generic-password (account-name)
+  "Get a generic password from the macOS keychain.
+The password is associated with the string ACCOUNT-NAME.
+This corresponds to the Account field in the Keychain Access GUI.
+If there is no matching password, or the output of 'security'
+is on an unexpected format, the function returns NIL."
+  (with-temp-buffer
+    (call-process "security"
+                  nil (list (current-buffer) t) nil
+                  "find-generic-password" "-a" account-name "-w")
+    (if (search-backward "not be found" nil t)
+        nil
+      (buffer-substring-no-properties 1 (- (point-max) 1)))))
+(my/keychain-get-generic-password "ehjc")
