@@ -181,12 +181,8 @@
   (avy-lead-face-2 ((nil (:foreground "#ebdbb2"))))
   (isearch ((nil (:foreground "#ebdbb2"))))
   (isearch-fail ((nil (:foreground "#ebdbb2"))))
-  (powerline-inactive2 ((nil (:background "#f2e5bc"))))
-  :config
-  ;;(set-face-foreground 'fill-column-indicator "#9d0006")
-  (set-face-foreground 'lazy-highlight (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
-                                           "#ebdbb2"
-                                         "#3a3a3a")))
+  ;;(fill-column-indicator "#9d0006")
+  (powerline-inactive2 ((nil (:background "#f2e5bc")))))
 
 
 
