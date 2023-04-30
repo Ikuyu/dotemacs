@@ -51,7 +51,8 @@
 ;; Install package manager 'use-package'
 ;; -------------------------------------
 (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
+  (package-install 'use-package))
+
 (require 'use-package)
 
 (setq use-package-always-ensure t        ; saves the trouble of having to specify :ensure t everywhere
@@ -319,8 +320,10 @@
   :quelpa (teletext-nos
            :fetcher github
            :repo "Ikuyu/emacs-teletext-nos")
-  :init (require 'teletext-nos))
-
+  :init (require 'teletext-nos)
+  :bind (:map teletext-mode-map
+              ("<wheel-up>" . nil)
+              ("<wheel-down>" . nil)))
 
 
 ;; ----------------------------
@@ -537,16 +540,17 @@
         ;;sly-complete-symbol-function 'sly-simple-completions    ; or: 'sly-flex-completions
         ;;sly-symbol-completion-mode nil
         ;;sly-kill-without-query-p t
-        ;;sly-mrepl-pop-sylvester nil
+        sly-mrepl-pop-sylvester nil
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
-        inferior-lisp-program "sbcl --noinform --disable-debugger"
+        (add-to-list 'slime-contribs 'slime-cl-indent)            ; ensure correct indentation e.g. of loop form
+        inferior-lisp-program "sbcl --noinform"
         ;;sly-common-lisp-style-default 'sbcl
         ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working: sly keeps connecting ad infinitum
-))
-        ;; sly-lisp-implementations '(;(sbcl ("sbcl" "--noinform" "--disable-debugger"))
+        ;; sly-lisp-implementations '((sbcl ("sbcl" "--noinform" "--disable-debugger"))
         ;;                            (clisp ("clisp" "-q" "-ansi" "-modern" "-I" "-on-error" "abort"))
-                                        ;(clozure-cl ("/Applications/CCL.app/Contents/Resources/darwinx86/dx86cl64")))))
+        ;;                            (clozure-cl ("/Applications/CCL.app/Contents/Resources/darwinx86/dx86cl64")))
+))
 
 
 
@@ -560,7 +564,7 @@
 
 
 ;; ---------------------
-;; fancy macro-expansion
+;; Fancy macro-expansion
 ;; ---------------------
 ;; (use-package sly-macrostep
 ;;   :after sly
@@ -1011,9 +1015,9 @@
 
 
 
-;; --------------------
-;; Let it snow in Emacs
-;; --------------------
+;; -------------
+;; Snow in Emacs
+;; -------------
 (use-package snow
   :custom
   (snow-show-background t)
