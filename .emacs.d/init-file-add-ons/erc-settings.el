@@ -37,15 +37,19 @@
 ;; Extend built-in irc support
 ;; ---------------------------
 (use-package erc
-  :defer t
   :config
-  (setq erc-user-full-name user-full-name
+  (setq erc-nickserv-identify-mode 'autodetect
+        erc-user-full-name user-full-name
         erc-nick "ehjc"
-        erc-email-userid user-mail-address
+        erc-use-auth-source-for-nickserv-password nil
+        erc-password (my/keychain-get-generic-password "ehjc")
         erc-prompt-for-password nil
         erc-prompt-for-nickserv-password nil
+        erc-email-userid user-mail-address
         erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs"))
         erc-prompt (lambda () (concat erc-nick "@ERC " (buffer-name) " %")) ; change prompt
+        erc-fill-column fill-column                 ; improve readability
+        erc-server-auto-reconnect t
         ;;bye-erc-message "Stay well!"
         ;;erc-auto-query 'bury		            ; hide new messages in the bufferlist instead of popping up
         ;;erc-fill-function 'erc-fill-static        ; align chat-usernames
