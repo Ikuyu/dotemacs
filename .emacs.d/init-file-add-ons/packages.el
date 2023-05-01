@@ -342,7 +342,7 @@
   :bind (("s-b" . frog-jump-buffer )))
 
 (use-package frog-menu
-  :custom-face (frog-menu-posframe-background-face ((nil (:background "#32302f")))))
+  :custom-face (frog-menu-posframe-background-face ((nil (:background "#f4e8ba")))))
 
 
 
