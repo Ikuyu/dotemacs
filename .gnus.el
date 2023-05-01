@@ -112,7 +112,8 @@
                                                 (nnimap-server-port 993)
                                                 (nnimap-stream ssl)
                                                 (nnimap-authinfo-file "~/.authinfo")))
-        GNUS-ignored-newsgroups ""           ; don't ignore [Gmail]/* groups
+        ;;gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]"
+        ;;gnus-ignored-newsgroups ""           ; don't ignore [Gmail]/* groups
         gnus-posting-styles '(((header "to" "hetlevenkronen@gmail.com") ; reply-to with the same address as it was sent to
                                (address "hetlevenkronen@gmail.com"))
                               ((header "to" "edwin@tope.nu")
@@ -137,6 +138,9 @@
                                          mm-file-name-collapse-whitespace
                                          mm-file-name-replace-whitespace)
         mm-default-directory "~/Downloads/"  ; default directory for saving attachments
+        ;;gnus-summary-make-false-root 'adopt  ; adopt a previous line in for our false roots
+        ;;gnus-summary-same-subject ""
+        gnus-group-line-format "%S%p%P%5y(%2i):%B%(%s:%G%)\n"
         gnus-summary-line-format (concat
                                   "%0{%U%R%z%}"                 ;; status
                                   "%3{│%}" "%1{%d%}" "%3{│%}"   ;; date
@@ -147,34 +151,24 @@
                                   " "
                                   "%B"
                                   "%s\n")
-        gnus-summary-make-false-root 'adopt  ; adopt a previous line in for our false roots
-        gnus-thread-sort-functions '(gnus-thread-sort-by-number
-                                     gnus-thread-sort-by-most-recent-date))
-  (if window-system
-      (setq
-       ;; Summary Threading Marks
-       gnus-sum-thread-tree-indent          " "
-       gnus-sum-thread-tree-false-root      "☆ "
-       gnus-sum-thread-tree-single-indent   "◎ "
-       gnus-sum-thread-tree-root            "● "
-       gnus-sum-thread-tree-vertical        "┃"
-       gnus-sum-thread-tree-leaf-with-other "┣━❯ "
-       gnus-sum-thread-tree-single-leaf     "┗━❯ "
-       ;; Summary Mode Marks
-       gnus-score-over-mark  ?↑
-       gnus-score-below-mark ?↓
-       gnus-ticked-mark      ?⚑
-       gnus-dormant-mark     ?⚐
-       gnus-expirable-mark   ?♻
-       gnus-read-mark        ?✓
-       gnus-del-mark         ?✗
-       gnus-killed-mark      ?☠
-       gnus-replied-mark     ?⟲
-       gnus-forwarded-mark   ?⤳
-       gnus-cached-mark      ?☍
-       gnus-recent-mark      ?★
-       gnus-unseen-mark      ?✩
-       gnus-unread-mark      ?✉))
+        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+        gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
+        gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+        gnus-sum-thread-tree-indent          " "
+        gnus-sum-thread-tree-false-root      ""
+        gnus-sum-thread-tree-single-indent   ""
+        gnus-sum-thread-tree-root            ""
+        gnus-sum-thread-tree-vertical        "│"
+        gnus-sum-thread-tree-leaf-with-other "├► "
+        gnus-sum-thread-tree-single-leaf     "╰► ")
+        ;;gnus-article-browse-delete-temp t
+        ;;gnus-treat-strip-trailing-blank-lines 'last
+        ;;gnus-keep-backlog 'nil
+        ;;gnus-summary-display-arrow nil       ; don't show that annoying arrow:
+        ;;gnus-mime-display-multipart-related-as-mixed t ; Show more MIME-stuff:
+        ;;gnus-auto-select-first nil           ; don't get the first article automatically:
+        ;;smiley-style 'medium
   :hook
   (gnus-save-quick-newsrc-hook . (lambda () (set (make-local-variable 'backup-inhibited) t)))
   (gnus-save-standard-newsrc-hook . (lambda () (set (make-local-variable 'backup-inhibited) t)))
