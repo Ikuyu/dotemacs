@@ -130,7 +130,7 @@
 (global-set-key (kbd "s-N") 'make-frame)
 (global-set-key (kbd "s-=") 'text-scale-increase)
 (global-set-key (kbd "s--") 'text-scale-decrease)
-(global-set-key (kbd "s-0") 'text-scale-mode)
+(global-set-key (kbd "s-0") (kbd "C-x C-0"))
 (global-set-key (kbd "s-I") (lambda ()
 			      (interactive)
 			      (shell-command "open .")))
