@@ -42,7 +42,9 @@
                                        (set-face-background 'powerline-inactive2 (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
                                                                                      "#32302f"
                                                                                    "#f2e5bc"))
-                                       ;;(set-face-foreground 'lazy-highlight "#949494")
+                                       (set-face-background 'frog-menu-posframe-background-face (if (string-match-p "gruvbox-dark.*" (symbol-name (car custom-enabled-themes)))
+                                                                                                    "#3c3836"
+                                                                                                  "#f4e8ba"))
                                        )
                                    (message "Error enabling Heaven and Hell:\n(Searching for program No such file or directory heaven-and-hell)"))))
 (define-key user-map (kbd "d") 'dired)
