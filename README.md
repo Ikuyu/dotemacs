@@ -4,8 +4,8 @@ To be used with the [Railwaycat Emacs Mac Port](https://github.com/railwaycat/ho
 
 Requirements:
 
-- brew install pandoc
-- brew install w3m
+- brew install [pandoc](https://pandoc.org)
+- brew install [w3m](https://w3m.sourceforge.net)
 - mkdir ./slipbox
 - [sbcl](https://www.sbcl.org) (used Common Lisp implementation with `Sly`)
 - touch ~/.sly-mrepl-history (prevent Sly printing the message 'Cannot read history file ...')
