@@ -30,11 +30,11 @@
 ;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 ;; IN THE SOFTWARE.
 
-;;    __ _ _ __  _   _ ___
-;;   / _` | '_ \| | | / __|
-;;  | (_| | | | | |_| \__ \
-;; (_)__, |_| |_|\__,_|___/
-;;   |___/
+;;                           __ _ _ __  _   _ ___
+;;                          / _` | '_ \| | | / __|
+;;                         | (_| | | | | |_| \__ \
+;;                        (_)__, |_| |_|\__,_|___/
+;;                          |___/
 
 ;; Gnus supports newsgroups (NNTP), email accounts (IMAP/POP) and sending mails
 ;; (IMAP). Each is called a server. A server can have many groups. For email
@@ -44,14 +44,19 @@
 ;; thread. Gnus counts by individual mail.
 
 ;; Passwords are stored in '~/.authinfo'. Make sure no one else can read your
-;; them:
+;; them (read-write rights for the user only):
 ;; $ chmod 600 ~/.authinfo
+
+;; For every email account create an item in the macOS keychain with:
+;; $ security add-internet-password -a example@gmail.com -s gmail.com -w "YourPassword"
+;; Check if the password can be retrieved with:
+;; $ security find-internet-password -a example@gmail.com -w
 
 ;; Important:
 ;; - Close Gnus with 'q' instead of 'C-x k'. This prevents Gnus from displaying
 ;;   the message 'Gnus auto-save file exists. Do you want to read it? (y or n)
-;;   when it start up.
-;; - Use 'L' to list all groups.
+;;   when it start up
+;; - Use 'L' to list all groups
 ;; - Use 'u' to subsribe to one or more groups/inboxes/accounts.
 
 
@@ -68,24 +73,46 @@
         gnus-summary-goto-unread 'never      ; commands should not atempt to go to the next unread article
         gnus-group-list-inactive-groups t    ; list inactive groups
         gnus-select-method '(nnnil nil)      ; avoid Gnus trying to connect to a non-existing local news server
-        gnus-secondary-select-methods        ; setup multiple accounts
-        '((nntp "news.gwene.org")
-          (nnimap "imap.gmail.com"           ; as for Gmail, make sure imap support is enabled in the account settings of the Gmail account
-                  (nnimap-address "imap.gmail.com")
-                  (nnimap-server-port 993)
-                  (nnimap-stream ssl)
-                  (nnimap-authinfo-file "~/.authinfo"))
-          (nnimap "edwin.tope.nu"
-                  (nnimap-address "imap.one.com")
-                  (nnimap-server-port 993)
-                  (nnimap-stream ssl)
-                  (nnimap-authinfo-file "~/.authinfo"))
-          (nnimap "velijnboeken.tope.nu"
-                  (nnimap-address "imap.one.com")
-                  (nnimap-server-port 993)
-                  (nnimap-stream ssl)
-                  (nnimap-authinfo-file "~/.authinfo")))
-        gnus-ignored-newsgroups ""           ; don't ignore [Gmail]/* groups
+        ;; mail-sources '((file)
+        ;;                (imap :server "imap.gmail.com"
+        ;;                      :port 993
+        ;;                      :user "hetlevenkronen@gmail.com"
+        ;;                      :password (my/keychain-get-internet-password "hetlevenkronen@gmail.com")
+        ;;                      :stream ssl
+        ;;                      ;;:predicate "1:*"
+        ;;                      ;;:authentication 'login   ; this is the default value
+        ;;                      ;;:mailbox "INBOX"         ; this is the default value
+        ;;                      :fetchflag "\\Seen")       ; default value is: "\Deleted"
+        ;;                (imap :server "imap.one.com"
+        ;;                      :port 993
+        ;;                      :user "edwin@tope.nu"
+        ;;                      :password (my/keychain-get-internet-password "edwin@tope.nu")
+        ;;                      :stream ssl
+        ;;                      :fetchflag "\\Seen")
+        ;;                (imap :server "imap.one.com"
+        ;;                      :port 993
+        ;;                      :user "velijnboeken@tope.nu"
+        ;;                      :password (my/keychain-get-internet-password "velijnboeken@tope.nu")
+        ;;                      :stream ssl
+        ;;                      :fetchflag "\\Seen"))
+        gnus-secondary-select-methods '((nntp "news.gwene.org")
+                                        (nnimap "hetlevenkronen@gmail.com"           ; make sure imap support is enabled in the account settings of the Gmail account
+                                                (nnimap-address "imap.gmail.com")
+                                                (nnimap-server-port 993)
+                                                (nnimap-stream ssl)
+                                                ;;(nnimap-login "hetlevenkronen@gmail.com" (my/keychain-get-internet-password "hetlevenkronen@gmail.com"))
+                                                (nnimap-authinfo-file "~/.authinfo"))
+                                        (nnimap "edwin.tope.nu"
+                                                (nnimap-address "imap.one.com")
+                                                (nnimap-server-port 993)
+                                                (nnimap-stream ssl)
+                                                (nnimap-authinfo-file "~/.authinfo"))
+                                        (nnimap "velijnboeken.tope.nu"
+                                                (nnimap-address "imap.one.com")
+                                                (nnimap-server-port 993)
+                                                (nnimap-stream ssl)
+                                                (nnimap-authinfo-file "~/.authinfo")))
+        GNUS-ignored-newsgroups ""           ; don't ignore [Gmail]/* groups
         gnus-posting-styles '(((header "to" "hetlevenkronen@gmail.com") ; reply-to with the same address as it was sent to
                                (address "hetlevenkronen@gmail.com"))
                               ((header "to" "edwin@tope.nu")
@@ -111,7 +138,7 @@
                                          mm-file-name-replace-whitespace)
         mm-default-directory "~/Downloads/"  ; default directory for saving attachments
         gnus-summary-line-format (concat
-                                  "%0{%U%R%z%}"                 ;; Status
+                                  "%0{%U%R%z%}"                 ;; status
                                   "%3{│%}" "%1{%d%}" "%3{│%}"   ;; date
                                   "  "
                                   "%4{%-20,20f%}"               ;; name
