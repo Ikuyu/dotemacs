@@ -35,7 +35,7 @@
 ;; ---------
 ;; Shortcuts
 ;; ---------
-;; ⌘C, ⌘V, ⌘X             - Copy/paste/cut to and from the system clipboard)
+;; ⌘C, ⌘V, ⌘X             — Copy/paste/cut to and from the system clipboard)
 ;; ⌘A                     — Select All
 ;; ⌘Z                     — Undo
 ;; ⌘⇧Z                    — Redo
@@ -56,41 +56,41 @@
 ;; ⌘↓                     — Move point to the end of the buffer
 ;; ⌘←                     — Move point to beginning of current line
 ;; ⌘→                     — Move point to end of current line
-;; ⌥↑                     - Move point to previous paragraph
-;; ⌥↓                     - Move point to next paragraph
+;; ⌥↑                     — Move point to previous paragraph
+;; ⌥↓                     — Move point to next paragraph
 ;; ⌘N                     — Create a new file
 ;; ⌘⇧N                    — Make a new window (frame)
-;; ⌘=                     - Scale up text
-;; ⌘-                     - Scale down text
-;; ⌘0                     - Reset scale
+;; ⌘=                     — Scale up text
+;; ⌘-                     — Scale down text
+;; ⌘0                     — Reset scale
 ;; ⌘⇧I                    — Display current file/directory in a new Finder window
-;; ⌘]                     - Go to the next buffer
-;; ⌘[                     - Go to the previous buffer
+;; ⌘]                     — Go to the next buffer
+;; ⌘[                     — Go to the previous buffer
 ;; ⌘⌫                     — Delete text from the current position to the beginning of the line.
-;; Fn ⌫                   — Delete Text to the right of the cursor.
-;; M⌫D                    – Delete entire word to the left
-;; Fn f or ^⌘F            – Toggle fullscreen-mode
-;; ⌥⌘F                    – Advanced search (replace text)
+;; Fn⌫                    — Delete Text to the right of the cursor.
+;; M⌫D                    — Delete entire word to the left
+;; Fn f or ^⌘F            — Toggle fullscreen-mode
+;; ⌥⌘F                    — Advanced search (replace text)
 ;; ⇧ + left mouse button  — Select/extend region
-;; ⌥ + left mouse button  - Rectangular selection
+;; ⌥ + left mouse button  — Rectangular selection
 ;; ⌘⇧ + left mouse button — Is bound to mc/add-cursor-on-click in package multiple-cursors
-;; Right mouse button     - Show context menu
-;; ⌘T                     - Open tab
-;; ⌘}                     - Go to the next tab
-;; ⌘{                     - Go to the prevous tab
-;; ⌘W                     - Close the active tab
-;; ⌘⇧W                    - Close all tabs except for one
-;; ⌘⇧T                    - Reopen last closed tab
-;; ⌘/                     - (un)Comment line/selection
-;; ⌘⇧; 		          - spelling/grammar (only works if a spelling checker program is installed)
-;; ⌘1                     - Delete other windows
-;; ⌘2                     - Split window below
-;; ⌘3                     - Split window right
-;; ⌘4                     - Delete window
-;; fn↑                    - Page up
-;; fn↓                    - Page down
-;; fn←                    - Home
-;; fn→                    - End
+;; Right mouse button     — Show context menu
+;; ⌘T                     — Open tab
+;; ⌘}                     — Go to the next tab
+;; ⌘{                     — Go to the prevous tab
+;; ⌘W                     — Close the active tab
+;; ⌘⇧W                    — Close all tabs except for one
+;; ⌘⇧T                    — Reopen last closed tab
+;; ⌘/                     — (un)Comment line/selection
+;; ⌘⇧;                    — spelling/grammar (only works if a spelling checker program is installed)
+;; ⌘1                     — Delete other windows
+;; ⌘2                     — Split window below
+;; ⌘3                     — Split window right
+;; ⌘4                     — Delete window
+;; fn↑                    — Page up
+;; fn↓                    — Page down
+;; fn←                    — Home
+;; fn→                    — End
 
 
 
