@@ -44,8 +44,8 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 
 (setq gc-cons-threshold most-positive-fixnum          ; don't collect garbage at early init while initialising
-      gc-cons-percentage 0.6                          ; 'gcmh' will clean things up later and reset these settings
-      default-file-name-handler-alist file-name-handler-alist ; tip from
+      gc-cons-percentage 0.6                          ; "gcmh" will clean things up later and reset these settings
+      default-file-name-handler-alist file-name-handler-alist ; tip from...
       file-name-handler-alist nil                     ; Doom Emacs
       inhibit-startup-screen t                        ; disable the splash screen and start with an empty *scratch* buffer
       inhibit-startup-echo-area-message t             ; disable the startup message in the echo area
