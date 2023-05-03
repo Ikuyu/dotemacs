@@ -48,7 +48,7 @@
 
 
 ;; -------------------------------------
-;; Install package manager 'use-package'
+;; Install package manager "use-package"
 ;; -------------------------------------
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
@@ -65,14 +65,14 @@
 ;; ------------------------------------------
 ;; Use Quelpa to install packages from source
 ;; ------------------------------------------
-(use-package quelpa		      ; obsolete in: emacs 29. Use package-vc-install instead
+(use-package quelpa		      ; obsolete in: emacs 29. Use "package-vc-install" instead
   ;;:custom (quelpa-upgrade-p t "Always try to update packages") ; see: 'auto-package-update'
   )
 
 (use-package quelpa-use-package       ; example: (package-vc-install '(combobulate :url "https://github.com/mickeynp/combobulate"))
   :init
   (setq quelpa-self-upgrade-p nil
-        quelpa-update-melpa-p nil))   ; 'auto-package-update' is used for updating (see elsewhere in this file)
+        quelpa-update-melpa-p nil))   ; "auto-package-update" is used for updating (see elsewhere in this file)
 
 
 
@@ -240,7 +240,7 @@
 ;; ----------------------------------
 ;; Keep installed packages up-to-date
 ;; ----------------------------------
-(use-package auto-package-update               ; Emacs 29: use the command 'package-update-all'
+(use-package auto-package-update               ; Emacs 29: use the command "package-update-all"
   :custom
   (auto-package-update-prompt-before-update t)
   (auto-package-update-delete-old-versions t)  ; delete residual older versions
@@ -312,7 +312,7 @@
 ;; --------------------------------
 ;; Read NOS Teletext pages in Emacs
 ;; --------------------------------
-(use-package teletext-nos                      ; start NOS Teletekst automatically with 's-u t' (see user-keymap.el)
+(use-package teletext-nos                      ; start NOS Teletekst automatically with "s-u t" (see: user-keymap.el)
   :quelpa (teletext-nos
            :fetcher github
            :repo "Ikuyu/emacs-teletext-nos")
@@ -325,7 +325,7 @@
 ;; ----------------------------
 ;; Fast jumping in visible text
 ;; ----------------------------
-(use-package avy ; an alternative is included in package 'meow' (see below)
+(use-package avy ; an alternative is included in package "meow" (see below)
   :config (avy-setup-default)
   :bind (("s-j" . avy-goto-char-timer)))       ; jump back in sequence with C-x C-SPC
 
@@ -349,8 +349,8 @@
 ;; ------------------------------------------
 ;; Increase selected region by semantic units
 ;; ------------------------------------------
-(use-package expand-region                     ; package 'meow' (see below) als it's own way of expanding a region
-  :bind ("C-=" . er/expand-region))            ; press C-= once to enable this mode
+(use-package expand-region                     ; package "meow" (see below) als it's own way of expanding a region
+  :bind ("C-=" . er/expand-region))            ; press "C-=" once to enable this mode
 
 
 
@@ -379,21 +379,21 @@
   :ensure nil
   :custom
   (dired-listing-switches "-lha --group-directories-first") ; human-readable listing
-  (dired-recursive-copies 'always)             ; "always" means no asking
-  (dired-recursive-deletes 'top)               ; "top" means ask once for top level directory
+  (dired-recursive-copies 'always)                 ; "always" means no asking
+  (dired-recursive-deletes 'top)                   ; "top" means ask once for top level directory
   :config
   (when (my/macos-p)
     (setq dired-use-ls-dired t
-          insert-directory-program "gls"       ; make sure 'gls' is installed with 'brew install coreutils'
+          insert-directory-program "gls"           ; make sure "gls" is installed with 'brew install coreutils'
           trash-directory "~/.Trash"))
-  (setq dired-dwim-target t                    ; if another Dired buffer is visible in another window, use that directory as target for rename/copy
-        dired-kill-when-opening-new-dired-buffer t ; use 'a' to replace the current Dired buffer with the file/directory the cursor is on
-        ;; dired-make-directory-clickable t       ; Emacs 29.1
-        ;; dired-mouse-drag-files t               ; Emacs 29.1
-        delete-by-moving-to-trash t)           ; move deleted files to trash
+  (setq dired-dwim-target t                        ; if another Dired buffer is visible in another window, use that directory as target for rename/copy
+        dired-kill-when-opening-new-dired-buffer t ; use "a" to replace the current Dired buffer with the file/directory the cursor is on
+        ;; dired-make-directory-clickable t        ; Emacs 29.1
+        ;; dired-mouse-drag-files t                ; Emacs 29.1
+        delete-by-moving-to-trash t)               ; move deleted files to trash
   :hook
   (dired-mode . dired-hide-details-mode)
-  (dired-mode-hook . auto-revert-mode)) ; automatically refresh dired buffer on changes
+  (dired-mode-hook . auto-revert-mode))            ; automatically refresh dired buffer on changes
 
 
 
@@ -417,7 +417,7 @@
 ;; -------------------------------------------
 ;; Disallow *scratch* buffer from being killed
 ;; -------------------------------------------
-(use-package unkillable-scratch     ; Emacs 29: use the command 'scratch-buffer' to switch to this buffer or to create one if it has been deleted
+(use-package unkillable-scratch     ; Emacs 29: use the command "scratch-buffer" to switch to this buffer or to create one if it has been deleted
   :config (unkillable-scratch t))
 
 
@@ -441,7 +441,7 @@
 
 
 ;; -------------------------------------------------
-;; Markdown support (requires 'brew install pandoc')
+;; Markdown support (requires "brew install pandoc")
 ;; -------------------------------------------------
 (use-package markdown-mode
   :init (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
@@ -494,7 +494,7 @@
 ;; ------------------
 ;; (use-package geiser
 ;;   :init
-;;   (setenv "LANG" "en_US.UTF-8")     ; fix 'warning failed to install locale' (en_NL is not a locale)
+;;   (setenv "LANG" "en_US.UTF-8")     ; fix "warning failed to install locale" (en_NL is not a locale)
 ;;   (setq geiser-default-implementation 'guile
 ;; 	geiser-mode-start-repl-p t
 ;; 	geiser-active-implementations '(guile))
@@ -528,7 +528,7 @@
 
 
 ;; ---------------------------------------------------------------
-;; Support for Common Lisp (requires 'touch ~/.sly-mrepl-history')
+;; Support for Common Lisp (requires "touch ~/.sly-mrepl-history")
 ;; ---------------------------------------------------------------
 (use-package sly
   :config
@@ -655,7 +655,7 @@
 ;; Edit multiple occurrences simultaneously
 ;; ----------------------------------------
 ;; https://www.youtube.com/watch?v=3O-bDYqhFos
-(use-package multiple-cursors       ; alternatives: 'iedit', 'macrursors' or 'meow' (see below)
+(use-package multiple-cursors       ; alternatives: "iedit", "macrursors" or "meow" (see below)
   :disabled
   :if (not my/modus-tollens)
   :init (setq mc/always-run-for-all t)
@@ -729,13 +729,13 @@
 ;; -------------------------------------
 ;; Spaced repetition system for org-mode
 ;; -------------------------------------
-(use-package org-drill)                 ; alternatives: {'Pamparam,'Org-fc,'Anki-editor,'Anki.el,'Ankifier.el}
+(use-package org-drill)                 ; alternatives: "pamparam", "org-fc", "anki-editor", "anki.el", "ankifier.el"
 
 
 
 
 ;; -----------------------------------------------------------
-;; Slipbox support for org-mode (requires 'mkdir '~/.slipbox')
+;; Slipbox support for org-mode (requires 'mkdir "~/.slipbox")
 ;; -----------------------------------------------------------
 (use-package org-roam
   :after org
@@ -765,7 +765,7 @@
 
 ;; ---------------------------------------------------------------------------
 ;; Browse the notes network in an interactive graph in the browser to remember
-;; certain relationships between notes (requires 'mkdir '~/.slipbox')
+;; certain relationships between notes (requires 'mkdir "~/.slipbox")
 ;; ---------------------------------------------------------------------------
 (use-package org-roam-ui
   :after org-roam
@@ -803,8 +803,8 @@
 
 
 ;; ---------------------------------------------------------------------
-;; Perform document conversions using the pandoc library (requires 'brew
-;; install pandoc')
+;; Perform document conversions using the pandoc library (requires "brew
+;; install pandoc")
 ;; ---------------------------------------------------------------------
 (use-package pandoc-mode
   :after org)
