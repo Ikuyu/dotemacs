@@ -133,15 +133,16 @@
 ;; code. In a fixed-pitch font all the characters have the same with whether
 ;; an i or an m, just like an old mechanical typewriter. This helps to align
 ;; the lines of code/text. On macOS use the "sf mono" or "menlo" font if you
-;; include special characters such as ⇧, ⌘, ⌥ and ⇪ in your code comments for
-;; a full monospace coverage:
+;; include any special characters such as ⇧, ⌘, ⌥ and ⇪ in your code comments
+;; for a full monospace coverage:
 ;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
 ;; (when (and (my/macos-p) (find-font (font-spec :name "sf mono")))
 ;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'light)
 ;;   (setq-default line-spacing 0.3))
 
-;; If you are not including any special characters, use the "monaco" font as
-;; this is still the most readable coding font for macOS:
+;; If you don't include any special characters in you comments, then use the
+;; "monaco" font, as this is still one of the most readable coding fonts on
+;; macOS:
 (set-face-attribute 'default nil :font "monaco" :height 160)
 (setq-default line-spacing 0.3)
 
