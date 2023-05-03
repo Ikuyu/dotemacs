@@ -46,7 +46,7 @@
 ;; - mouse
 ;; - macos-keybindings
 ;; - user-keymap
-;; - arrow, end, home and delete keys as well as their control and met
+;; - arrow, end, home and delete keys as well as their control and meta
 ;;   prefixes
 ;; - macOS specific undo/redo behavior.
 (defvar my/modus-tollens nil)
@@ -132,13 +132,16 @@
 ;; By default Emacs uses a monospaced (fixed pitch) font designed for writing
 ;; code. In a fixed-pitch font all the characters have the same with whether
 ;; an i or an m, just like an old mechanical typewriter. This helps to align
-;; the lines of code/text. On macOS we can use 'monaco' (still one of the best
-;; readable fonts for coders) or 'sf mono':
+;; the lines of code/text. On macOS use the "sf mono" or "menlo" font if you
+;; include special characters such as ⇧, ⌘, ⌥ and ⇪ in your code comments for
+;; a full monospace coverage:
 ;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
 ;; (when (and (my/macos-p) (find-font (font-spec :name "sf mono")))
 ;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'light)
 ;;   (setq-default line-spacing 0.3))
 
+;; If you are not including any special characters, use the "monaco" font as
+;; this is still the most readable coding font for macOS:
 (set-face-attribute 'default nil :font "monaco" :height 160)
 (setq-default line-spacing 0.3)
 
