@@ -115,8 +115,7 @@
       ;; (define-key minibuffer-local-map (kbd "C-n") #'minibuffer-next-completion)              ; down when completing in the minibuffer`'
       ;; (define-key completion-in-region-mode-map (kbd "C-p") #'minibuffer-previous-completion) ; up when competing in a normal buffer
       ;; (define-key completion-in-region-mode-map (kbd "C-n") #'minibuffer-next-completion)     ; down when competing in a normal buffer
-      gnus-inhibit-startup-message t
-      auth-sources '("~/.authinfo" "~/.authinfo.gpg" macos-keychain-internet macos-keychain-generic)) ; tell auth-source where credentials can be found
+      gnus-inhibit-startup-message t)
 
 ;; Adjust global settings (functions).
 (setenv "LANG" "en_US.UTF-8")                    ; make sure pbcopy/pbpaste (see below) uses utf8
@@ -130,22 +129,23 @@
   "Clear existing theme settings instead of layering them."
   (mapc #'disable-theme custom-enabled-themes))
 
-;; By default Emacs uses a monospaced (fixed-pitch) font designed for writing
-;; code. In a fixed-pitch font all the characters have the same with, whether
+;; By default Emacs uses a monospaced (fixed pitch) font designed for writing
+;; code. In a fixed-pitch font all the characters have the same with whether
 ;; an i or an m, just like an old mechanical typewriter. This helps to align
-;; the lines of code/text. On macOS use 'SF Mono' when available:
+;; the lines of code/text. On macOS we can use 'monaco' (still one of the best
+;; readable fonts for coders) or 'sf mono':
 ;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
-(when (and (my/macos-p) (find-font (font-spec :name "SF Mono")))
-  (set-face-attribute 'default nil :font "SF Mono" :height 160 :weight 'light)
-  (setq-default line-spacing 0.3))	         ; hide new messages in the bufferlist instead of popping up
+;; (when (and (my/macos-p) (find-font (font-spec :name "sf mono")))
+;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'light)
+;;   (setq-default line-spacing 0.3))
+
+(set-face-attribute 'default nil :font "monaco" :height 160)
+(setq-default line-spacing 0.3)
 
 ;; Hooks.
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespace on save
 ;;(add-hook 'prog-mode-hook 'turn-on-auto-fill)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
-
-;; Faces.
-;;(set-face-foreground 'fill-column-indicator "#9d0006")
 
 ;; --------------------------------------
 ;; Adjust default copy/yank/kill behavior
