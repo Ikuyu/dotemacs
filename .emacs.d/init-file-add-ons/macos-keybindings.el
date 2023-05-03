@@ -35,62 +35,62 @@
 ;; ---------
 ;; Shortcuts
 ;; ---------
-;; ⌘C, ⌘V, ⌘X             — Copy/paste/cut to and from the system clipboard)
-;; ⌘A                     — Select All
-;; ⌘Z                     — Undo
-;; ⌘⇧Z                    — Redo
-;; ⌘F                     — Search for a string
-;; ⌘G                     — Search forward for a string
-;; ⌘⇧G                    — Search backward for a string
-;; ⌘O                     — Open an existing file into an Emacs buffer
-;; ⌘S                     — Save current buffer into its file
-;; ⌘⇧S                    — Write current buffer into another file
-;; ⌘P                     — Print current buffer
-;; ⌘M                     — Minimize the window
-;; ⌘Q                     — Quit
-;; ⌘.                     — Interrupt operation
-;; ⌘,                     — Open settings/preferences
-;; ⌘L                     — Go to Line
-;; ⌘K                     — Kill current buffer
-;; ⌘↑                     — Move point to the beginning of the buffer
-;; ⌘↓                     — Move point to the end of the buffer
-;; ⌘←                     — Move point to beginning of current line
-;; ⌘→                     — Move point to end of current line
-;; ⌥↑                     — Move point to previous paragraph
-;; ⌥↓                     — Move point to next paragraph
-;; ⌘N                     — Create a new file
-;; ⌘⇧N                    — Make a new window (frame)
-;; ⌘=                     — Scale up text
-;; ⌘-                     — Scale down text
-;; ⌘0                     — Reset scale
-;; ⌘⇧I                    — Display current file/directory in a new Finder window
-;; ⌘]                     — Go to the next buffer
-;; ⌘[                     — Go to the previous buffer
-;; ⌘⌫                     — Delete text from the current position to the beginning of the line.
-;; Fn⌫                    — Delete Text to the right of the cursor.
-;; M⌫D                    — Delete entire word to the left
-;; Fn f or ^⌘F            — Toggle fullscreen-mode
-;; ⌥⌘F                    — Advanced search (replace text)
-;; ⇧ + left mouse button  — Select/extend region
-;; ⌥ + left mouse button  — Rectangular selection
-;; ⌘⇧ + left mouse button — Is bound to mc/add-cursor-on-click in package multiple-cursors
-;; Right mouse button     — Show context menu
-;; ⌘T                     — Open tab
-;; ⌘}                     — Go to the next tab
-;; ⌘{                     — Go to the prevous tab
-;; ⌘W                     — Close the active tab
-;; ⌘⇧W                    — Close all tabs except for one
-;; ⌘⇧T                    — Reopen last closed tab
-;; ⌘/                     — (un)Comment line/selection
-;; ⌘⇧;                    — spelling/grammar (only works if a spelling checker program is installed)
-;; ⌘1                     — Delete other windows
-;; ⌘2                     — Split window below
-;; ⌘3                     — Split window right
-;; ⌘4                     — Delete window
-;; fn↑                    — Page up
-;; fn↓                    — Page down
-;; fn←                    — Home
-;; fn→                    — End
+;; Command+C, Command+V, Command+X — Copy/paste/cut to and from the system clipboard)
+;; Command+A                       — Select All
+;; Command+Z                       — Undo
+;; Command+Shift+Z                 — Redo
+;; Command+F                       — Search for a string
+;; Command+G                       — Search forward for a string
+;; Command+Shift+G                 — Search backward for a string
+;; Command+O                       — Open an existing file into an Emacs buffer
+;; Command+S                       — Save current buffer into its file
+;; Command+Shift+S                 — Write current buffer into another file
+;; Command+P                       — Print current buffer
+;; Command+M                       — Minimize the window
+;; Command+Q                       — Quit
+;; Command+.                       — Interrupt operation
+;; Command+,                       — Open settings/preferences
+;; Command+L                       — Go to Line
+;; Comman+K                        — Kill current buffer
+;; Command+Up Arrow                — Move point to the beginning of the buffer
+;; Command+Down Arrow              — Move point to the end of the buffer
+;; Command+Left Arrow              — Move point to beginning of current line
+;; Command+Right Arrow             — Move point to end of current line
+;; Option+Up Arrow                 — Move point to previous paragraph
+;; Option+Down Arrow               — Move point to next paragraph
+;; Command+N                       — Create a new file
+;; Command+Shift+N                 — Make a new window (frame)
+;; Command+=                       — Scale up text
+;; Command+-                       — Scale down text
+;; Command+0                       — Reset scale
+;; Command+Shift+I                 — Display current file/directory in a new Finder window
+;; Command+]                       — Go to the next buffer
+;; Command+[                       — Go to the previous buffer
+;; Command+Backspace               — Delete text from the current position to the beginning of the line.
+;; Fn+Backspace                    — Delete Text to the right of the cursor.
+;; Option-Backspace                — Delete entire word to the left
+;; Fn+f or Control+Command+F       — Toggle fullscreen-mode
+;; Command+Option+F                — Advanced search (replace text)
+;; Shift+Left Mouse Button         — Select/extend region
+;; Option+Left Mouse Button        — Rectangular selection
+;; Command+Shift+Left Mouse Button — Is bound to mc/add-cursor-on-click in package multiple-cursors
+;; Right Mouse Button              — Show context menu
+;; Command+T                       — Open tab
+;; Command+}                       — Go to the next tab
+;; Command+{                       — Go to the prevous tab
+;; Command+W                       — Close the active tab
+;; Command+Shift+W                 — Close all tabs except for one
+;; Command+Shift+T                 — Reopen last closed tab
+;; Command+/                       — (un)Comment line/selection
+;; Command+Shift+;                 — spelling/grammar (only works if a spelling checker program is installed)
+;; Command+1                       — Delete other windows
+;; Command+2                       — Split window below
+;; Command+3                       — Split window right
+;; Command+4                       — Delete window
+;; fn+Up Arrow                     — Page up
+;; fn+Down Arrow                   — Page down
+;; fn+Left Arrow                   — Home
+;; fn+Right Arrow                  — End
 
 
 
