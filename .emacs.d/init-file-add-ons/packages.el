@@ -381,6 +381,9 @@
   (dired-listing-switches "-lha --group-directories-first") ; human-readable listing
   (dired-recursive-copies 'always)                 ; "always" means no asking
   (dired-recursive-deletes 'top)                   ; "top" means ask once for top level directory
+  :bind
+  (:map dired-mode-map
+        ("C-c C-a" . gnus-dired-attach))
   :config
   (when (my/macos-p)
     (setq dired-use-ls-dired t
@@ -729,8 +732,7 @@
 ;; -------------------------------------
 ;; Spaced repetition system for org-mode
 ;; -------------------------------------
-(use-package org-drill)                 ; alternatives: "pamparam", "org-fc", "anki-editor", "anki.el", "ankifier.el"
-
+(use-package org-drill)
 
 
 
