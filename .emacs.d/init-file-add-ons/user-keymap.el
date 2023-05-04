@@ -91,7 +91,7 @@
 (define-key user-map (kbd "O") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'org-drill)
-                                     'org-drill
+                                     (org-drill)
                                    (message "Error enabling Org Drill:\n(Searching for program No such file or directory org-drill)"))))
 (define-key user-map (kbd "r") (lambda ()
                                  (interactive)
