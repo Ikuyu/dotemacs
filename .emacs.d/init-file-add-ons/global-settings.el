@@ -137,17 +137,18 @@
 ;; for a full monospace coverage:
 ;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
 ;; (when (and (my/macos-p) (find-font (font-spec :name "sf mono")))
-;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'light)
-;;   (setq-default line-spacing 0.3))
+;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'regular) ; or 'light
+;;   (setq-default line-spacing 0.25))
 
 ;; If you don't include any special characters in you comments, then use
 ;; "Monaco" or "Comic Code" (a commercial alternative), as these are one of the
 ;; most legible fonts for coding on macOS:
-(set-face-attribute 'default nil :font "monaco" :height 160)
-(setq-default line-spacing 0.3)
+(when (and (my/macos-p))
+  (set-face-attribute 'default nil :font "monaco" :height 150 :weight 'regular)
+  (setq-default line-spacing 0.25))
 
 ;; Hooks.
-(add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace); delete trailing whitespace on save
 ;;(add-hook 'prog-mode-hook 'turn-on-auto-fill)
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
