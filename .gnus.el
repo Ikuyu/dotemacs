@@ -52,6 +52,8 @@
 ;; Check if the password can be retrieved with:
 ;; $ security find-internet-password -a example@gmail.com -w
 
+;; TERMINOLOGY: https://www.xemacs.org/Links/tutorials_3.html
+
 ;; Important:
 ;; - Close Gnus with 'q' instead of 'C-x k'. This prevents Gnus from displaying
 ;;   the message 'Gnus auto-save file exists. Do you want to read it? (y or n)
@@ -73,7 +75,7 @@
         gnus-summary-goto-unread 'never      ; commands should not atempt to go to the next unread article
         gnus-group-list-inactive-groups t    ; list inactive groups
         gnus-select-method '(nnnil nil)      ; avoid Gnus trying to connect to a non-existing local news server
-        ;; mail-sources '((file)
+        ;; mail-sources '((file)                ; no errors, but no groups (doesn't seem to fetch mail)
         ;;                (imap :server "imap.gmail.com"
         ;;                      :port 993
         ;;                      :user "hetlevenkronen@gmail.com"
@@ -100,20 +102,25 @@
                                                 (nnimap-address "imap.gmail.com")
                                                 (nnimap-server-port 993)
                                                 (nnimap-stream ssl)
-                                                ;;(nnimap-login "hetlevenkronen@gmail.com" (my/keychain-get-internet-password "hetlevenkronen@gmail.com"))
-                                                (nnimap-authinfo-file "~/.authinfo"))
+                                                (nnimap-authinfo-file "~/.authinfo")
+                                                (nnmail-expiry-target "nnimap+hetlevenkronen@gmail.com:[Gmail]/Trash")
+                                                (nnmail-expiry-wait 'immediate)
+                                                ;;(nnimap-expunge 'on-exit)
+                                                )
                                         (nnimap "edwin.tope.nu"
                                                 (nnimap-address "imap.one.com")
                                                 (nnimap-server-port 993)
                                                 (nnimap-stream ssl)
-                                                (nnimap-authinfo-file "~/.authinfo"))
+                                                (nnimap-authinfo-file "~/.authinfo")
+                                                (nnmail-expiry-target "nnimap+edwin.tope.nu:INBOX.Trash")
+                                                (nnmail-expiry-wait 'immediate))
                                         (nnimap "velijnboeken.tope.nu"
                                                 (nnimap-address "imap.one.com")
                                                 (nnimap-server-port 993)
                                                 (nnimap-stream ssl)
-                                                (nnimap-authinfo-file "~/.authinfo")))
-        ;;gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\”]\”[#’()]"
-        ;;gnus-ignored-newsgroups ""           ; don't ignore [Gmail]/* groups
+                                                (nnimap-authinfo-file "~/.authinfo")
+                                                (nnmail-expiry-target "nnimap+velijnboeken.tope.nu:INBOX.Trash")
+                                                (nnmail-expiry-wait 'immediate)))
         gnus-posting-styles '(((header "to" "hetlevenkronen@gmail.com") ; reply-to with the same address as it was sent to
                                (address "hetlevenkronen@gmail.com"))
                               ((header "to" "edwin@tope.nu")
@@ -176,11 +183,10 @@
 
 
 
-;; -------------------------------------------------------
-;; Setup built-in html support (see: mm-text-html-renderer
-;; -------------------------------------------------------
+;; --------------------------------------------------------
+;; Setup built-in html support (see: mm-text-html-renderer)
+;; --------------------------------------------------------
 (use-package shr
-  :defer t
   :init
   (defun oni:shr-colorize-remove-last-arg (args)
     "If ARGS has more than 3 items, remove the last one."
@@ -189,7 +195,11 @@
       args))
   :config
   (setq shr-color-visible-distance-min 10
-        shr-color-visible-luminance-min 60)
+        shr-color-visible-luminance-min 60
+        shr-use-fonts nil
+        shr-use-colors nil
+        shr-max-image-proportion 0.7
+        shr-width (current-fill-column))
   (advice-add #'shr-colorize-region :filter-args
               #'oni:shr-colorize-remove-last-arg))
 
@@ -239,3 +249,5 @@
                                             (delete-region (match-beginning 0) (point-max))
                                             (gnus-alias-select-identity))))
   :hook (message-setup-hook . gnus-alias-determine-identity))
+
+(add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
