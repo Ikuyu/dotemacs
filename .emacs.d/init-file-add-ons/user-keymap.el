@@ -1,6 +1,3 @@
-;; ===========
-;; User keymap
-;; ===========
 
 
 ;; Author: Edwin H. Jonkvorst <hetlevenkronen@gmail.com>.
@@ -48,6 +45,17 @@
                                        )
                                    (message "Error enabling Heaven and Hell:\n(Searching for program No such file or directory heaven-and-hell)"))))
 (define-key user-map (kbd "d") 'dired)
+(define-key user-map (kbd "D") (lambda ()
+                                 (interactive)
+                                 (if (package-installed-p 'sdcv)
+                                     (if (eq major-mode 'sdcv-mode)
+                                         (progn
+                                           (read-only-mode -1)
+                                           (major-mode-restore))
+                                     (progn
+                                       (major-mode-suspend)
+                                       (sdcv-mode)))
+                                   (message "Error enabling sdcv:\n(Searching for program No such file or directory sdcv)"))))
 (define-key user-map (kbd "e") (lambda ()                ; to kill the ERC buffer and terminate its child process use C-x k
 				 (interactive)
 				 "Start ERC using TLS with preset information."
