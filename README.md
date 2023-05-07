@@ -11,5 +11,6 @@ Requirements:
 - touch ~/.sly-mrepl-history (prevent Sly printing the message 'Cannot read history file ...')
 - [guile](https://www.gnu.org/software/guile/) if you want to use this scheme with `Geiser`
 - [Bitstream Vera Sans Mono font](http://legionfonts.com/fonts/bitstream-vera-sans-mono) font (the `teletext-nos` package depends on it)
+- brew install sdcv; mkdir -p $HOME/.stardict/dic # afterwards copy [dictionaries](http://download.huzheng.org/babylon/) to $HOME/.stardict/dic
 - if [installed](https://medium.com/@shashikant.jagtap/getting-apples-sf-mono-font-in-macos-1de5183add84), the prefered font `SF Mono` is used
 - an [~/.authinfo](https://linil.wordpress.com/2008/01/18/gnus-gmail/) file.
