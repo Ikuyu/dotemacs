@@ -1031,4 +1031,4 @@
 ;; ---------------------------------------------------------
 (use-package sdcv
   :config
-  (setq sdcv-dictionary-data-dir "~/.stardict/dict"))
+  (setq sdcv-dictionary-data-dir "~/.stardict/dic"))
