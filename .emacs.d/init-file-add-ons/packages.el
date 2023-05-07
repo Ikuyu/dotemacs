@@ -173,7 +173,9 @@
 ;;   (load-theme 'solarized-dark t))
 
 (use-package gruvbox-theme
-  :init (load-theme 'gruvbox-light-medium t)
+  :init
+  (setq gruvbox-bold-constructs t)
+  (load-theme 'gruvbox-light-medium t)
   :custom-face
   (avy-lead-face ((nil (:foreground "#ebdbb2"))))
   (avy-lead-face-0 ((nil (:foreground "#ebdbb2"))))
@@ -1019,3 +1021,14 @@
   :custom
   (snow-show-background t)
   (snow-debug nil))
+
+
+;; ---------------------------------------------------------
+;; Interface for sdcv (StartDict console version). Requires:
+;; $ brew install sdcv
+;; $ mkdir -p $HOME/.stardict/dic
+;; Copy dictionaries to $HOME/.stardict/dic
+;; ---------------------------------------------------------
+(use-package sdcv
+  :config
+  (setq sdcv-dictionary-data-dir "~/.stardict/dict"))
