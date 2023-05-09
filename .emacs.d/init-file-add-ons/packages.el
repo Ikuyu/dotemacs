@@ -936,12 +936,6 @@
     (set-face-attribute 'meow-insert-indicator nil :foreground "#ffdfaf" :background "#9d0006")  ; red
     (set-face-attribute 'meow-beacon-indicator nil :foreground "#ffdfaf" :background "#005f5f")) ; aqua
   (setq meow-expand-hint-remove-delay 2)
-  (defun my/meow-scroll-up ()
-    (interactive)
-    (scroll-up-command 1))
-  (defun my/meow-scroll-down ()
-    (interactive)
-    (scroll-down-command 1))
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     (meow-motion-overwrite-define-key
@@ -1025,8 +1019,8 @@
      '("y" . meow-save)
      '("Y" . meow-sync-grab)
      '("z" . meow-pop-selection)
-     '("N" . my/meow-scroll-up)
-     '("M" . my/meow-scroll-down)
+     '("M" . my/scroll-up-one-line)   ; (see: global-settings.el)
+     '("N" . my/scroll-down-one-line) ; (see: global-settings.el)
      '("'" . repeat)
      '("<escape>" . ignore)))
   (meow-setup)
@@ -1039,7 +1033,7 @@
 ;; -------------
 (use-package snow
   :custom
-  (snow-show-background t)
+  (snow-show-background t) ; show a backgroundimage
   (snow-debug nil))
 
 
