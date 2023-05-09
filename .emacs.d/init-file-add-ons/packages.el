@@ -487,6 +487,12 @@
   (defun init-nov-delayed-render ()
     (run-with-idle-timer 0.2 nil 'nov-render-document))
   :custom (nov-text-width t)
+  :config (progn
+            (defun my-nov-font-setup ()
+              (face-remap-add-relative 'variable-pitch
+                                       :family "times new roman"
+                                       :height 1n.3))
+            (add-hook 'nov-mode-hook 'my-nov-font-setup)
   :hook
   (nov-mode-hook . olivetti-mode)
   ;;(nov-mode-hook . no-fringes)
@@ -544,7 +550,8 @@
         sly-mrepl-pop-sylvester nil
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
-        inferior-lisp-program "sbcl --noinform"
+        ;;inferior-lisp-program "sbcl --noinform"
+        inferior-lisp-program "clisp"
         ;;sly-common-lisp-style-default 'sbcl
         ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working: sly keeps connecting ad infinitum
         ;; sly-lisp-implementations '((sbcl ("sbcl" "--noinform" "--disable-debugger"))
@@ -924,6 +931,12 @@
     (set-face-attribute 'meow-insert-indicator nil :foreground "#ffdfaf" :background "#9d0006")  ; red
     (set-face-attribute 'meow-beacon-indicator nil :foreground "#ffdfaf" :background "#005f5f")) ; aqua
   (setq meow-expand-hint-remove-delay 2)
+  (defun my/meow-scroll-up ()
+    (interactive)
+    (scroll-up-command 1))
+  (defun my/meow-scroll-down ()
+    (interactive)
+    (scroll-down-command 1))
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     (meow-motion-overwrite-define-key
@@ -1007,6 +1020,8 @@
      '("y" . meow-save)
      '("Y" . meow-sync-grab)
      '("z" . meow-pop-selection)
+     '("N" . my/meow-scroll-up)
+     '("M" . my/meow-scroll-down)
      '("'" . repeat)
      '("<escape>" . ignore)))
   (meow-setup)
@@ -1023,12 +1038,12 @@
   (snow-debug nil))
 
 
-;; ---------------------------------------------------------
-;; Interface for sdcv (StartDict console version). Requires:
+;; -----------------------------------------------------------
+;; Interface for sdcv (startdict - console version). Requires:
 ;; $ brew install sdcv
 ;; $ mkdir -p $HOME/.stardict/dic
 ;; Copy dictionaries to $HOME/.stardict/dic
-;; ---------------------------------------------------------
+;; -----------------------------------------------------------
 (use-package sdcv
   :config
   (setq sdcv-dictionary-data-dir "~/.stardict/dic"))
