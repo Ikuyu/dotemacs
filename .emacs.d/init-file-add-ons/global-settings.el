@@ -69,7 +69,8 @@
 
 ;; Adjust global settings (variables).
 (setq electric-pair-pairs '((?\{ . ?\}) (?\< . ?\>)) ; extend electrc-pair-mode with curly braces etc.
-      fast-but-imprecise-scrolling t             ; accelerate scrolling operations
+      fast-but-imprecise-scrolling 1             ; accelerate scrolling operations
+      scroll-preserve-screen-position t          ; point keeps its screen position while scrolling (keyboard only)
       inhibit-compacting-font-caches t           ; don’t compact font caches during garbage collection
       save-interprogram-paste-before-kill t      ; ensure that Emacs kill operations do not irrevocably overwrite existing clipboard text
       apropos-do-all t                           ; apropos commands will search more extensively
@@ -125,26 +126,30 @@
 (save-place-mode)		                 ; when visiting a file, point goessavehist-mode to the last place where it was before
 (tooltip-mode -1)                                ; show tooltips in the minibuffer
 
+;;scroll up/down by line
+(global-set-key (kbd "M-n") (kbd "C-u 1 M-v"))
+(global-set-key (kbd "M-p") (kbd "C-u 1 C-v"))
+
 (defadvice load-theme (before clear-previous-themes activate)
   "Clear existing theme settings instead of layering them."
   (mapc #'disable-theme custom-enabled-themes))
 
 ;; By default Emacs uses a monospaced (fixed pitch) font designed for writing
-;; code. In a fixed-pitch font all the characters have the same with whether
-;; an i or an m, just like an old mechanical typewriter. This helps to align
-;; the lines of code/text. On macOS use the "SF Mono" or "Menlo" font if you
-;; include any special characters such as ⇧, ⌘, ⌥ and ⇪ in your code comments
-;; for a full monospace coverage:
+;; code. In a fixed-pitch font all the characters have the same with, whether
+;; an i or an m, just like the old mechanical typewriter. This helps to align
+;; the lines of code/text. On macOS you can use the "SF Mono" font or "Menlo"
+;; for a full monospace coverage if you include any special characters such as
+;; ⇧, ⌘, ⌥ and ⇪ in your code comments:
 ;; https://osxdaily.com/2018/01/07/use-sf-mono-font-mac/
 ;; (when (and (my/macos-p) (find-font (font-spec :name "sf mono")))
 ;;   (set-face-attribute 'default nil :font "sf mono" :height 160 :weight 'regular) ; or 'light
 ;;   (setq-default line-spacing 0.25))
 
-;; If you don't include any special characters in you comments, then use
-;; "Monaco" or "Comic Code" (a commercial alternative), as these are one of the
-;; most legible fonts for coding on macOS:
+;; If you don't include any special characters, then use"Monaco" or
+;; "Comic Code" (the commercial alternative), as these are one of the
+;; most legible fonts on macOS for coding :
 (when (and (my/macos-p))
-  (set-face-attribute 'default nil :font "monaco" :height 150 :weight 'regular)
+  (set-face-attribute 'default nil :font "comic code" :height 160 :weight 'regular)
   (setq-default line-spacing 0.25))
 
 ;; Hooks.
