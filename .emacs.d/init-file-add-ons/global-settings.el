@@ -126,13 +126,22 @@
 (save-place-mode)		                 ; when visiting a file, point goessavehist-mode to the last place where it was before
 (tooltip-mode -1)                                ; show tooltips in the minibuffer
 
-;;scroll up/down by line
-(global-set-key (kbd "M-n") (kbd "C-u 1 M-v"))
-(global-set-key (kbd "M-p") (kbd "C-u 1 C-v"))
-
 (defadvice load-theme (before clear-previous-themes activate)
   "Clear existing theme settings instead of layering them."
   (mapc #'disable-theme custom-enabled-themes))
+
+(defun my/scroll-down-one-line ()
+  "Scroll down one line"
+  (interactive)
+  (scroll-down-command 1))
+
+(defun my/scroll-up-one-line ()
+  "Scroll up one line; "
+  (interactive)
+  (scroll-up-command 1))
+
+(global-set-key (kbd "M-p") 'my/scroll-up-one-line)
+(global-set-key (kbd "M-n") 'my/scroll-down-one-line)
 
 ;; By default Emacs uses a monospaced (fixed pitch) font designed for writing
 ;; code. In a fixed-pitch font all the characters have the same with, whether
