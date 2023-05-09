@@ -492,7 +492,7 @@
               (face-remap-add-relative 'variable-pitch
                                        :family "times new roman"
                                        :height 1n.3))
-            (add-hook 'nov-mode-hook 'my-nov-font-setup)
+            (add-hook 'nov-mode-hook 'my-nov-font-setup))
   :hook
   (nov-mode-hook . olivetti-mode)
   ;;(nov-mode-hook . no-fringes)
@@ -502,39 +502,43 @@
 
 ;; ------------------
 ;; Support for Scheme
-;; ------------------
-;; (use-package geiser
-;;   :init
-;;   (setenv "LANG" "en_US.UTF-8")     ; fix "warning failed to install locale" (en_NL is not a locale)
-;;   (setq geiser-default-implementation 'guile
-;; 	geiser-mode-start-repl-p t
-;; 	geiser-active-implementations '(guile))
-;;   :commands (geiser run-geiser))
+  ;; ------------------
+(use-package geiser
+  :disabled
+  :init
+  (setenv "LANG" "en_US.UTF-8")     ; fix "warning failed to install locale" (en_NL is not a locale)
+  (setq geiser-default-implementation 'guile
+	geiser-mode-start-repl-p t
+	geiser-active-implementations '(guile))
+  :commands (geiser run-geiser))
 
-;; (use-package geiser-guile
-;;   :after geiser)
+(use-package geiser-guile
+  :disabled
+  :after geiser)
 
 
 
 ;; -------------------------
 ;; Autocompletion for Geiser
 ;; -------------------------
-;; (use-package ac-geiser
-;;   :config (eval-after-load 'auto-complete
-;; 	    '(add-to-list 'ac-modes 'geiser-repl-mode))
-;;   :hook
-;;   (geiser-mode  . ac-geiser-setup)
-;;   (geiser-repl-mode . ac-geiser-setup))
+(use-package ac-geiser
+  :disabled
+  :config (eval-after-load 'auto-complete
+	    '(add-to-list 'ac-modes 'geiser-repl-mode))
+  :hook
+  (geiser-mode  . ac-geiser-setup)
+  (geiser-repl-mode . ac-geiser-setup))
 
 
 
 ;; ------------------
 ;; Support for Racket
 ;; ------------------
-;; (use-package racket-mode
-;;   :hook ((racket-mode . racket-xp-mode)
-;;          (racket-mode . racket-unicode-input-method-enable)
-;;          (racket-repl-mode . racket-unicode-input-method-enable))
+(use-package racket-mode
+  :disabled
+  :hook ((racket-mode . racket-xp-mode)
+         (racket-mode . racket-unicode-input-method-enable)
+         (racket-repl-mode . racket-unicode-input-method-enable)))
 
 
 
@@ -550,10 +554,9 @@
         sly-mrepl-pop-sylvester nil
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
-        ;;inferior-lisp-program "sbcl --noinform"
-        inferior-lisp-program "clisp"
+        inferior-lisp-program "sbcl --noinform"
         ;;sly-common-lisp-style-default 'sbcl
-        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working: sly keeps connecting ad infinitum
+        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working
         ;; sly-lisp-implementations '((sbcl ("sbcl" "--noinform" "--disable-debugger"))
         ;;                            (clisp ("clisp" "-q" "-ansi" "-modern" "-I" "-on-error" "abort"))
         ;;                            (clozure-cl ("/Applications/CCL.app/Contents/Resources/darwinx86/dx86cl64")))
@@ -564,19 +567,21 @@
 ;; ----------------------------------------
 ;; Add ANSI colors support to the sly mrepl
 ;; ----------------------------------------
-;; (use-package sly-repl-ansi-color
-;;   :after sly
-;;   :init (add-to-list 'sly-contribs 'sly-repl-ansi-color nil #'eq))
+(use-package sly-repl-ansi-color
+  :disabled
+  :after sly
+  :init (add-to-list 'sly-contribs 'sly-repl-ansi-color nil #'eq))
 
 
 
 ;; ---------------------
 ;; Fancy macro-expansion
 ;; ---------------------
-;; (use-package sly-macrostep
-;;   :after sly
-;;   :config (with-eval-after-load 'sly
-;;             (sly-enable-contrib 'sly-macrostep)))
+(use-package sly-macrostep
+  :disabled
+  :after sly
+  :config (with-eval-after-load 'sly
+            (sly-enable-contrib 'sly-macrostep)))
 
 
 
@@ -796,8 +801,8 @@
   :config (setq org-mime-export-options '(:preserve-breaks t))
           (add-hook 'message-mode-hook
           (lambda ()
-            (local-set-key "\C-c\M-o" 'org-mime-htmlize))))
-(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart)
+            (local-set-key "\C-c\M-o" 'org-mime-htmlize)))
+          (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart))
 
 
 
