@@ -1,3 +1,6 @@
+;; ===========
+;; User keymap
+;; ===========
 
 
 ;; Author: Edwin H. Jonkvorst <hetlevenkronen@gmail.com>.
@@ -117,18 +120,23 @@
 (define-key user-map (kbd "S") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'snow)
-                                     (snow)
+                                     (progn
+                                       (snow)
+                                       (switch-to-buffer "*snow*")
+                                       (face-remap-add-relative 'default :background "#2b3c44"))
                                    (message "Error enabling Snow:\n(Searching for program No such file or directory now)"))))
 (define-key user-map (kbd "t") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'teletext)
-                                     (teletext)
-                                   (message "Error enabling Teletext:\n(Searching for program No such file or directory teletext)"))
-                                 (if (package-installed-p 'teletext-nos)
                                      (progn
-                                       (face-remap-add-relative 'default :foreground "#ebdbb2" :background "#262626")
-                                       (teletext-select-network "NOS"))
-                                   (message "Error enabling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)"))))
+                                       (teletext)
+                                       (if (package-installed-p 'teletext-nos)
+                                           (progn
+                                             (face-remap-add-relative 'default :foreground "#ebdbb2" :background "#262626")
+                                             (teletext-select-network "NOS"))
+                                         (message "Error enabling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)")))
+                                   (message "Error enabling Teletext:\n(Searching for program No such file or directory teletext)"))
+                                 ))
 (define-key user-map (kbd "T") (lambda ()
 				 (interactive)
                                  (if (package-installed-p 'terminal-here)
