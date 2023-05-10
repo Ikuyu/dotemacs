@@ -42,13 +42,7 @@
 
 (global-set-key [remap dabrev-expand] 'hippie-expand) ; Use M-/ to cycle through completions. Emacs 29: (keymap-global-set "M-/" 'hippie-expand)
 
-;; Flag to disable the:
-;; - mouse
-;; - macos-keybindings
-;; - user-keymap
-;; - arrow, end, home and delete keys as well as their control and meta
-;;   prefixes
-;; - macOS specific undo/redo behavior.
+;; Flag to disable the mouse, the macos-keybindings, the user-keymap, the arrow, end, home and delete keys as well as their control and meta prefixes and the macOS native undo/redo behavior (restart required).
 (defvar my/modus-tollens nil)
 
 ;; Function: check whether the system is Darwin/macOS or not.
