@@ -1,4 +1,4 @@
-# Personal Emacs configuration files
+# Personal Emacs Configuration Files
 
 To be used with the [Railwaycat Emacs Mac Port](https://github.com/railwaycat/homebrew-emacsmacport).
 
