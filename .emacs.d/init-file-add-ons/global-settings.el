@@ -187,10 +187,12 @@ function that sets `deactivate-mark' to t."
   (delete-region (region-beginning) (region-end))
   (message "kill"))
 
-;; Overwrite default copy/yank/kill keybindings.
+;; Overwrite the default copy/yank/kill keybindings.
 (global-set-key (kbd "M-w") 'my/pasteboard-copy)
 (global-set-key (kbd "C-y") 'my/pasteboard-yank)
 (global-set-key (kbd "C-w") 'my/pasteboard-kill)
+
+
 
 ;; ------------------------------------------
 ;; Retrieve passwords from the macOS keychain
@@ -224,6 +226,11 @@ is on an unexpected format, the function returns NIL."
       (buffer-substring-no-properties 1 (- (point-max) 1)))))
 (my/keychain-get-generic-password "ehjc")
 
+
+
+;; ----------------------------------------------
+;; Add the ability to scroll up/down line by line
+;; ----------------------------------------------
 (defun my/scroll-down-one-line ()
   "Scroll down one line."
   (interactive)
@@ -234,7 +241,6 @@ is on an unexpected format, the function returns NIL."
   (interactive)
   (scroll-up-command 1))
 
-(global-set-key (kbd "M-p") 'my/scroll-up-one-line)
-(global-set-key (kbd "M-n") 'my/scroll-down-one-line)
-
-(global-set-key (kbd "s-<drag-mouse-1>") 'mouse-save-then-kill)
+(when (not my/modus-tollens)
+  (global-set-key (kbd "M-p") 'my/scroll-up-one-line)
+  (global-set-key (kbd "M-n") 'my/scroll-down-one-line))
