@@ -130,19 +130,6 @@
   "Clear existing theme settings instead of layering them."
   (mapc #'disable-theme custom-enabled-themes))
 
-(defun my/scroll-down-one-line ()
-  "Scroll down one line"
-  (interactive)
-  (scroll-down-command 1))
-
-(defun my/scroll-up-one-line ()
-  "Scroll up one line; "
-  (interactive)
-  (scroll-up-command 1))
-
-(global-set-key (kbd "M-p") 'my/scroll-up-one-line)
-(global-set-key (kbd "M-n") 'my/scroll-down-one-line)
-
 ;; By default Emacs uses a monospaced (fixed pitch) font designed for writing
 ;; code. In a fixed-pitch font all the characters have the same with, whether
 ;; an i or an m, just like the old mechanical typewriter. This helps to align
@@ -236,3 +223,18 @@ is on an unexpected format, the function returns NIL."
         nil
       (buffer-substring-no-properties 1 (- (point-max) 1)))))
 (my/keychain-get-generic-password "ehjc")
+
+(defun my/scroll-down-one-line ()
+  "Scroll down one line."
+  (interactive)
+  (scroll-down-command 1))
+
+(defun my/scroll-up-one-line ()
+  "Scroll up one line."
+  (interactive)
+  (scroll-up-command 1))
+
+(global-set-key (kbd "M-p") 'my/scroll-up-one-line)
+(global-set-key (kbd "M-n") 'my/scroll-down-one-line)
+
+(global-set-key (kbd "s-<drag-mouse-1>") 'mouse-save-then-kill)
