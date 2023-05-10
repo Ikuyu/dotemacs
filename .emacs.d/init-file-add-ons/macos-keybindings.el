@@ -176,6 +176,9 @@
 (global-set-key (kbd "H-<left>") 'beginning-of-buffer)
 (global-set-key (kbd "H-<right>") 'end-of-buffer)
 
+;; A final touch:
+(global-set-key (kbd "s-<drag-mouse-1>") 'mouse-save-then-kill) ; prevent the selected region from being deselected after pressing s-<drag-mouse-1>
+
 
 
 ;; ---------------------------------
