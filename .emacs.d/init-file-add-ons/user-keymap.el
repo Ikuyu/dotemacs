@@ -120,21 +120,30 @@
 (define-key user-map (kbd "S") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'snow)
-                                     (progn
-                                       (snow)
-                                       (switch-to-buffer "*snow*")
-                                       (face-remap-add-relative 'default :background "#2b3c44"))
+                                     (if (string= (buffer-name) "*snow*")
+                                         (progn
+                                           (switch-to-buffer "*snow*")
+                                           (kill-buffer (current-buffer))
+                                           (my/toggle-fullscreen))
+                                       (progn
+                                         (my/toggle-fullscreen)
+                                         (snow)
+                                         (switch-to-buffer "*snow*") ; strange, but necessary here
+                                         (scroll-up-command 5)
+                                         (face-remap-add-relative 'default :background "#2b3c44")))
                                    (message "Error enabling Snow:\n(Searching for program No such file or directory now)"))))
 (define-key user-map (kbd "t") (lambda ()
                                  (interactive)
                                  (if (package-installed-p 'teletext)
-                                     (progn
-                                       (teletext)
-                                       (if (package-installed-p 'teletext-nos)
-                                           (progn
-                                             (face-remap-add-relative 'default :foreground "#ebdbb2" :background "#262626")
-                                             (teletext-select-network "NOS"))
-                                         (message "Error enabling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)")))
+                                     (if (not (string= (buffer-name) "*Teletext*"))
+                                         (progn
+                                           (teletext)
+                                           (if (package-installed-p 'teletext-nos)
+                                               (progn
+                                                 (face-remap-add-relative 'default :foreground "#ebdbb2" :background "#262626")
+                                                 (teletext-select-network "NOS"))
+                                             (message "Error enabling Teletext NOS:\n(Searching for program No such file or directory teletext-nos)")))
+                                       (kill-buffer (current-buffer)))
                                    (message "Error enabling Teletext:\n(Searching for program No such file or directory teletext)"))
                                  ))
 (define-key user-map (kbd "T") (lambda ()
