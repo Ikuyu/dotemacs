@@ -1053,7 +1053,7 @@
 ;; Interface for sdcv (startdict - console version). Requires:
 ;; $ brew install sdcv
 ;; $ mkdir -p $HOME/.stardict/dic
-;; Copy dictionaries to $HOME/.stardict/dic
+;; Put the dictionaries in $HOME/.stardict/dic
 ;; -----------------------------------------------------------
 (use-package sdcv
   :config
