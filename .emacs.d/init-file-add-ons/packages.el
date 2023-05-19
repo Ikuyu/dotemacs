@@ -545,6 +545,17 @@
 ;; ---------------------------------------------------------------
 ;; Support for Common Lisp (requires "touch ~/.sly-mrepl-history")
 ;; ---------------------------------------------------------------
+;; NOTE: when using CLISP with Sly, make sure the following changes have been
+;; made to the file 'slynk.lisp' in ~/.emacs.d/elpa/sly*/slink:
+;; - the function 'flush-listener-streams' should look like this:
+;;   (defun flush-listener-streams (listener)
+;;     (with-slots (in out) listener
+;;     (force-output out)
+;;     #-(or armedbear clisp)
+;;     (slynk-gray::reset-stream-line-column out)
+;;     (clear-input in)))
+;; - the word 'sb-mop' in the line (sb-mop:eql-specializer-object specializer))
+;;   must be 'slynk-mop'.
 (use-package sly
   :config
   (setq sly-net-coding-system 'utf-8-unix
@@ -554,9 +565,9 @@
         sly-mrepl-pop-sylvester nil
         sly-mrepl-history-file-name (expand-file-name "~/.sly-mrepl-history")
         sly-contribs '(sly-fancy)
-        inferior-lisp-program "sbcl --noinform"
+        ;;inferior-lisp-program "sbcl --noinform"
         ;;sly-common-lisp-style-default 'sbcl
-        ;;inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working
+        inferior-lisp-program "clisp -q -ansi -modern -I -on-error abort" ; not working
         ;; sly-lisp-implementations '((sbcl ("sbcl" "--noinform" "--disable-debugger"))
         ;;                            (clisp ("clisp" "-q" "-ansi" "-modern" "-I" "-on-error" "abort"))
         ;;                            (clozure-cl ("/Applications/CCL.app/Contents/Resources/darwinx86/dx86cl64")))
@@ -1033,8 +1044,9 @@
 ;; -------------
 (use-package snow
   :custom
-  (snow-show-background t) ; show a backgroundimage
+  (snow-show-background t) ; show background image
   (snow-debug nil))
+
 
 
 ;; -----------------------------------------------------------
